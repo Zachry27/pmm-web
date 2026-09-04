@@ -102,12 +102,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-800 selection:text-white">
+    <div className="min-h-screen bg-slate-100 flex flex-col font-sans text-slate-800 antialiased selection:bg-blue-800 selection:text-white w-full overflow-x-hidden">
       {/* Top Bar Informasi */}
       <div className="bg-slate-950 text-slate-300 text-xs py-2 px-3 sm:px-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-3 text-[11px] sm:text-xs">
-            <span className="flex items-center gap-1.5 text-blue-300 font-semibold">
+        <div className="max-w-7xl mx-auto flex justify-between items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs truncate">
+            <span className="flex items-center gap-1 text-blue-300 font-semibold truncate">
               <ShieldCheck className="w-3.5 h-3.5 text-blue-400 shrink-0" />
               PT. Katiara Muda Jelajah
             </span>
@@ -115,10 +115,10 @@ export default function App() {
             <span className="hidden sm:inline text-slate-400">NIB: 3107230137724</span>
             <span className="hidden md:inline text-slate-600">|</span>
             <span className="hidden md:inline text-slate-300">
-              Musim Umroh 1446 H / 2024 - 2025 M
+              Musim Umroh 1446 H
             </span>
           </div>
-          <div className="flex items-center gap-3 text-[11px] sm:text-xs">
+          <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs shrink-0">
             <span className="bg-slate-900 border border-slate-800 px-2 py-0.5 rounded text-slate-300">
               1 SAR ≈ Rp {liveKurs.sar.toLocaleString("id-ID")}
             </span>
@@ -128,7 +128,8 @@ export default function App() {
               rel="noreferrer"
               className="text-slate-300 hover:text-white transition-colors flex items-center gap-1 font-medium"
             >
-              <PhoneCall className="w-3 h-3 text-blue-400 shrink-0" /> CS Online
+              <PhoneCall className="w-3 h-3 text-blue-400 shrink-0" />
+              <span className="hidden sm:inline">CS Online</span>
             </a>
           </div>
         </div>
@@ -142,15 +143,15 @@ export default function App() {
       />
 
       {/* Main Pages dengan Transisi Halus */}
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-hidden">
         <AnimatePresence mode="wait">
           {page === "home" && (
             <motion.div
               key="home"
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
             >
               <HomePage
                 setPage={setPage}
@@ -163,10 +164,10 @@ export default function App() {
           {page === "jasa" && (
             <motion.div
               key="jasa"
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
             >
               <JasaPage
                 setPayModal={setPayModal}
@@ -178,10 +179,10 @@ export default function App() {
           {page === "muthawif" && (
             <motion.div
               key="muthawif"
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
             >
               <MuthawifPage setPage={setPage} />
             </motion.div>
@@ -190,10 +191,10 @@ export default function App() {
           {page === "simulator" && (
             <motion.div
               key="simulator"
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
             >
               <SimulatorPage
                 defaultKurs={liveKurs.sar}
@@ -207,10 +208,10 @@ export default function App() {
           {page === "tentang" && (
             <motion.div
               key="tentang"
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
             >
               <TentangPage setPage={setPage} />
             </motion.div>
@@ -243,21 +244,21 @@ export default function App() {
 }
 
 // ----------------------------------------------------
-// FLOATING CS WHATSAPP WIDGET (PROFESIONAL & ONLINE)
+// FLOATING CS WHATSAPP WIDGET (KOMPAK DI MOBILE)
 // ----------------------------------------------------
 function FloatingCSWidget() {
   const [showTooltip, setShowTooltip] = useState(true);
 
   return (
-    <div className="fixed bottom-5 right-4 sm:right-6 z-50 flex flex-col items-end gap-2 pointer-events-auto">
-      {/* Speech Bubble Tooltip */}
+    <div className="fixed bottom-4 sm:bottom-6 right-3 sm:right-6 z-50 flex flex-col items-end gap-2 pointer-events-auto">
+      {/* Speech Bubble Tooltip Desktop Only */}
       <AnimatePresence>
         {showTooltip && (
           <motion.div
             initial={{ opacity: 0, y: 10, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="bg-white p-3.5 rounded-2xl shadow-xl border border-slate-200 max-w-[260px] text-xs text-slate-800 relative hidden sm:block"
+            className="bg-white p-3 rounded-2xl shadow-xl border border-slate-200 max-w-[240px] text-xs text-slate-800 relative hidden md:block"
           >
             <button
               onClick={() => setShowTooltip(false)}
@@ -265,17 +266,17 @@ function FloatingCSWidget() {
             >
               <X className="w-3 h-3" />
             </button>
-            <div className="flex items-center gap-2 mb-1.5">
+            <div className="flex items-center gap-1.5 mb-1">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
               </span>
               <span className="font-bold text-[11px] text-slate-900">
-                Layanan Pelanggan PMM
+                Customer Service PMM
               </span>
             </div>
             <p className="text-slate-600 text-[11px] leading-relaxed">
-              Butuh konsultasi Muthawif, Hotel, atau Kereta Cepat? Kami siap membantu via WhatsApp.
+              Konsultasi Muthawif, Hotel, atau Kereta Cepat via WhatsApp.
             </p>
           </motion.div>
         )}
@@ -288,28 +289,30 @@ function FloatingCSWidget() {
         rel="noreferrer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="group flex items-center gap-3 bg-white hover:bg-slate-50 text-slate-900 pl-2 pr-4 py-2 rounded-full shadow-xl border border-slate-300 transition-all cursor-pointer"
+        className="group flex items-center gap-2 sm:gap-2.5 bg-white hover:bg-slate-50 text-slate-900 p-1.5 sm:pl-2 sm:pr-4 sm:py-2 rounded-full shadow-lg border border-slate-300 transition-all cursor-pointer"
       >
-        {/* Avatar CS dengan Green Pulsing Badge */}
-        <div className="relative w-10 h-10 rounded-full overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
+        {/* Avatar CS */}
+        <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
           <img
             src={IMAGES.csAvatar}
             alt="Customer Service PMM"
             className="w-full h-full object-cover"
           />
-          <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white"></span>
+          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
         </div>
 
-        {/* Text Details */}
-        <div className="text-left">
-          <div className="flex items-center gap-1.5">
-            <span className="font-extrabold text-xs text-slate-900">CS Hotline</span>
-            <span className="inline-flex items-center gap-1 px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold">
+        {/* Text Details (Compact on mobile) */}
+        <div className="text-left pr-2 sm:pr-0">
+          <div className="flex items-center gap-1">
+            <span className="font-extrabold text-[11px] sm:text-xs text-slate-900">CS PMM</span>
+            <span className="inline-flex items-center px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold">
               Online
             </span>
           </div>
-          <div className="text-[10px] text-blue-800 font-semibold group-hover:underline flex items-center gap-1">
-            <PhoneCall className="w-2.5 h-2.5" /> Chat WhatsApp
+          <div className="text-[10px] text-blue-800 font-semibold flex items-center gap-1">
+            <PhoneCall className="w-2.5 h-2.5" />
+            <span className="hidden sm:inline">Chat WhatsApp</span>
+            <span className="sm:hidden">Chat</span>
           </div>
         </div>
       </motion.a>
@@ -318,7 +321,7 @@ function FloatingCSWidget() {
 }
 
 // ----------------------------------------------------
-// NAVBAR (RESPONSIF & TOUCH FRIENDLY)
+// NAVBAR
 // ----------------------------------------------------
 function Navbar({ page, setPage, onOpenTransport }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -326,17 +329,17 @@ function Navbar({ page, setPage, onOpenTransport }) {
   const navLinks = [
     { id: "home", label: "Beranda" },
     { id: "muthawif", label: "Muthawif" },
-    { id: "jasa", label: "Katalog Layanan" },
+    { id: "jasa", label: "Katalog" },
     { id: "simulator", label: "Simulator Biaya" },
     { id: "tentang", label: "Tentang PMM" },
   ];
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         {/* Logo */}
         <div
-          className="cursor-pointer flex items-center gap-3"
+          className="cursor-pointer flex items-center gap-2.5 sm:gap-3"
           onClick={() => {
             setPage("home");
             setMobileOpen(false);
@@ -345,7 +348,7 @@ function Navbar({ page, setPage, onOpenTransport }) {
           <img
             src={LOGO}
             alt="Persatuan Muthawif Muda"
-            className="h-10 sm:h-12 w-auto object-contain"
+            className="h-9 sm:h-12 w-auto object-contain"
           />
           <div className="hidden lg:block border-l border-slate-300 pl-3">
             <div className="text-xs font-bold tracking-wider text-blue-900 uppercase">
@@ -363,7 +366,7 @@ function Navbar({ page, setPage, onOpenTransport }) {
             <button
               key={link.id}
               onClick={() => setPage(link.id)}
-              className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+              className={`px-3.5 lg:px-4 py-2 rounded-full text-xs lg:text-sm font-semibold transition-all ${
                 page === link.id
                   ? "bg-blue-800 text-white shadow-xs"
                   : "text-slate-600 hover:text-slate-900 hover:bg-white"
@@ -374,7 +377,7 @@ function Navbar({ page, setPage, onOpenTransport }) {
           ))}
         </nav>
 
-        {/* Action Button Desktop */}
+        {/* Action Buttons Desktop */}
         <div className="hidden md:flex items-center gap-2">
           <button
             onClick={onOpenTransport}
@@ -385,31 +388,31 @@ function Navbar({ page, setPage, onOpenTransport }) {
           </button>
           <button
             onClick={() => setPage("simulator")}
-            className="px-4 py-2 rounded-xl text-xs font-bold bg-blue-800 hover:bg-blue-900 text-white shadow-sm transition-all flex items-center gap-1.5"
+            className="px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-800 hover:bg-blue-900 text-white shadow-sm transition-all flex items-center gap-1.5"
           >
             <FileSpreadsheet className="w-3.5 h-3.5" />
             Simulator Biaya
           </button>
         </div>
 
-        {/* Mobile menu button */}
+        {/* Mobile menu trigger */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-xl"
           aria-label="Menu"
         >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-2 shadow-xl overflow-hidden"
+            className="md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-1.5 shadow-xl overflow-hidden"
           >
             {navLinks.map((link) => (
               <button
@@ -418,7 +421,7 @@ function Navbar({ page, setPage, onOpenTransport }) {
                   setPage(link.id);
                   setMobileOpen(false);
                 }}
-                className={`w-full text-left px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
+                className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
                   page === link.id
                     ? "bg-blue-50 text-blue-800 font-bold"
                     : "text-slate-700 hover:bg-slate-50"
@@ -428,24 +431,24 @@ function Navbar({ page, setPage, onOpenTransport }) {
               </button>
             ))}
 
-            <div className="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2">
+            <div className="pt-2.5 border-t border-slate-100 grid grid-cols-2 gap-2">
               <button
                 onClick={() => {
                   onOpenTransport();
                   setMobileOpen(false);
                 }}
-                className="w-full py-3 px-3 rounded-xl border border-slate-300 text-xs font-bold text-slate-800 flex items-center justify-center gap-1.5 bg-slate-50"
+                className="w-full py-2.5 px-3 rounded-xl border border-slate-300 text-xs font-bold text-slate-800 flex items-center justify-center gap-1.5 bg-slate-50"
               >
-                <Bus className="w-4 h-4 text-blue-800" /> Tabel Transportasi
+                <Bus className="w-3.5 h-3.5 text-blue-800" /> Tabel Mobil
               </button>
               <button
                 onClick={() => {
                   setPage("simulator");
                   setMobileOpen(false);
                 }}
-                className="w-full py-3 px-3 rounded-xl bg-blue-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
+                className="w-full py-2.5 px-3 rounded-xl bg-blue-800 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
               >
-                <FileSpreadsheet className="w-4 h-4" /> Simulator HPP
+                <FileSpreadsheet className="w-3.5 h-3.5" /> Simulator
               </button>
             </div>
           </motion.div>
@@ -460,30 +463,26 @@ function Navbar({ page, setPage, onOpenTransport }) {
 // ----------------------------------------------------
 function HomePage({ setPage, setPayModal, onOpenTransport }) {
   return (
-    <div className="space-y-12 sm:space-y-16">
-      {/* Hero Section dengan Foto HD Haramain & Overlay */}
-      <section className="relative overflow-hidden bg-slate-950 text-white pt-12 pb-20 sm:pt-20 sm:pb-28">
-        {/* Background Image HD dengan Opacity */}
+    <div className="space-y-10 sm:space-y-16">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-slate-950 text-white pt-10 pb-16 sm:pt-20 sm:pb-24">
+        {/* Background Image HD */}
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.hero}
             alt="Mekah Haramain"
-            className="w-full h-full object-cover object-center opacity-25 filter brightness-90"
+            className="w-full h-full object-cover object-center opacity-20 filter brightness-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-blue-950/70 to-slate-950"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-blue-950/75 to-slate-950"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-5 sm:space-y-6">
+          <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-5">
             {/* Tag Resmi */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300 text-xs font-bold tracking-wide uppercase shadow-sm"
-            >
-              <ShieldCheck className="w-4 h-4 text-blue-400" />
-              Layanan Resmi Land Arrangement & Muthawif Saudi
-            </motion.div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300 text-[11px] sm:text-xs font-bold tracking-wide uppercase">
+              <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+              Layanan Land Arrangement & Muthawif Saudi
+            </div>
 
             {/* Motto Arab */}
             <div className="font-arabic text-2xl sm:text-3xl md:text-4xl text-slate-200 tracking-wide">
@@ -491,28 +490,28 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
             </div>
 
             {/* Judul Utama */}
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
               Muthawif Muda, <br />
               <span className="text-blue-300">Melayani Perjalanan Umroh Anda</span>
             </h1>
 
             {/* Deskripsi */}
-            <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed max-w-2xl mx-auto px-2">
               Tim kolaboratif alumni Timur Tengah (Arab Saudi, Mesir, Sudan, Tunis, dan Maroko). Berpegang teguh pada adab islami, berkomitmen memberikan pelayanan terbaik untuk para tamu Allah di Mekah dan Madinah.
             </p>
 
             {/* Tombol Aksi Hero */}
-            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
+            <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 px-4 sm:px-0">
               <button
                 onClick={() => setPage("simulator")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-800 hover:bg-blue-700 text-white font-bold text-sm shadow-md transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-800 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all"
               >
                 <FileSpreadsheet className="w-4 h-4" />
                 Buka Simulator Biaya (HPP)
               </button>
               <button
                 onClick={() => setPage("muthawif")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm border border-slate-700 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm border border-slate-700 transition-all"
               >
                 <Users className="w-4 h-4 text-blue-300" />
                 Rincian Tugas Muthawif
@@ -521,7 +520,7 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
                 href={WA}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-slate-700 text-slate-200 hover:text-white hover:bg-slate-900 font-bold text-sm transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-700 text-slate-200 hover:text-white hover:bg-slate-900 font-bold text-xs sm:text-sm transition-all"
               >
                 <PhoneCall className="w-4 h-4 text-blue-400" />
                 Hubungi Kami
@@ -529,57 +528,57 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
             </div>
 
             {/* Poin Kepercayaan */}
-            <div className="pt-4 flex flex-wrap justify-center items-center gap-4 sm:gap-6 text-xs text-slate-400">
-              <div className="flex items-center gap-1.5">
+            <div className="pt-3 flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] sm:text-xs text-slate-400">
+              <div className="flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Legalitas PT & NIB Resmi</span>
+                <span>Legalitas PT & NIB</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Bahasa Arab & Inggris Fasih</span>
+                <span>Bahasa Arab & Inggris</span>
               </div>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
-                <span>Bimbingan Dewan Senior</span>
+                <span>Dewan Pengawas Senior</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Ringkasan Parameter Layanan */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 sm:-mt-12 relative z-20">
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-5 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 divide-y sm:divide-y-0 md:divide-x divide-slate-100 text-center">
-          <div className="pt-2 sm:pt-0">
-            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-900">
-              280 - 300 SAR
+      {/* Ringkasan Parameter Layanan (Grid Bersih Mobile) */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 relative z-20">
+        <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-4 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center">
+          <div className="p-2 sm:p-0 rounded-xl bg-slate-50 sm:bg-transparent border sm:border-0 border-slate-100">
+            <div className="text-lg sm:text-2xl font-extrabold text-blue-900">
+              280-300 SAR
             </div>
-            <div className="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">
+            <div className="text-[10px] sm:text-xs font-medium text-slate-500 mt-0.5">
               Muthawif / Hari / Grup
             </div>
           </div>
-          <div className="pt-2 sm:pt-0">
-            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-900">
+          <div className="p-2 sm:p-0 rounded-xl bg-slate-50 sm:bg-transparent border sm:border-0 border-slate-100">
+            <div className="text-lg sm:text-2xl font-extrabold text-blue-900">
               140 USD
             </div>
-            <div className="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">
-              Visa Umroh + Tasreh Raudhah
+            <div className="text-[10px] sm:text-xs font-medium text-slate-500 mt-0.5">
+              Visa + Tasreh Raudhah
             </div>
           </div>
-          <div className="pt-2 sm:pt-0">
-            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-900">
+          <div className="p-2 sm:p-0 rounded-xl bg-slate-50 sm:bg-transparent border sm:border-0 border-slate-100">
+            <div className="text-lg sm:text-2xl font-extrabold text-blue-900">
               7 Armada
             </div>
-            <div className="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">
-              Sedan s/d Big Bus 45 Seat
+            <div className="text-[10px] sm:text-xs font-medium text-slate-500 mt-0.5">
+              Sedan s/d Big Bus
             </div>
           </div>
-          <div className="pt-2 sm:pt-0">
-            <div className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-blue-900">
+          <div className="p-2 sm:p-0 rounded-xl bg-slate-50 sm:bg-transparent border sm:border-0 border-slate-100">
+            <div className="text-lg sm:text-2xl font-extrabold text-blue-900">
               Agen Resmi
             </div>
-            <div className="text-[11px] sm:text-xs font-medium text-slate-500 mt-1">
-              Kereta Cepat Haramain (HHR)
+            <div className="text-[10px] sm:text-xs font-medium text-slate-500 mt-0.5">
+              Kereta Cepat HHR
             </div>
           </div>
         </div>
@@ -587,31 +586,31 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
 
       {/* Dua Pilar Layanan */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid md:grid-cols-2 gap-5 sm:gap-8">
           {/* Kartu Biro Travel */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+          <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center text-xl font-bold mb-4">
-                <Briefcase className="w-6 h-6" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center font-bold mb-3 sm:mb-4">
+                <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+              <h2 className="text-base sm:text-xl font-extrabold text-slate-900 mb-1.5 sm:mb-2">
                 Untuk Biro Perjalanan Umroh & Haji
               </h2>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
                 PMM bertindak sebagai perpanjangan tangan dan wajah travel Anda di Tanah Suci. Menyediakan paket komplit Land Arrangement (LA) Airport to Airport, muthawif berseragam travel Anda, koordinasi muassasah, hingga pengurusan hotel dan transportasi.
               </p>
               <ul className="text-xs text-slate-700 space-y-2 border-t border-slate-100 pt-3">
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-blue-800 shrink-0" />
-                  Paket terpadu 17 komponen handling resmi
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                  <span>Paket terpadu 17 komponen handling resmi</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-blue-800 shrink-0" />
-                  Kordinasi lapangan 24 jam dengan supir dan muassasah
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                  <span>Koordinasi 24 jam dengan supir dan muassasah</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-blue-800 shrink-0" />
-                  Harga rate grosir transparan dengan rincian jelas
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                  <span>Harga grosir transparan dengan rincian per pax</span>
                 </li>
               </ul>
             </div>
@@ -624,29 +623,29 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
           </div>
 
           {/* Kartu Rombongan Keluarga / Mandiri */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+          <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
             <div>
-              <div className="w-12 h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center text-xl font-bold mb-4">
-                <Users className="w-6 h-6" />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center font-bold mb-3 sm:mb-4">
+                <Users className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+              <h2 className="text-base sm:text-xl font-extrabold text-slate-900 mb-1.5 sm:mb-2">
                 Untuk Umroh Mandiri & Rombongan Keluarga
               </h2>
-              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4">
-                Bagi Anda yang merencanakan ibadah umroh mandiri bersama keluarga atau kelompok kecil, PMM siap mendampingi kebutuhan ziarah, pendampingan thawaf/sai, pemesanan tiket kereta cepat, dan armada mobil VIP (GMC / Staria).
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3">
+                Bagi Anda yang merencanakan ibadah umroh mandiri bersama keluarga atau rombongan kecil, PMM siap mendampingi kebutuhan ziarah, pendampingan thawaf/sai, pemesanan tiket kereta cepat, dan armada mobil VIP (GMC / Staria).
               </p>
               <ul className="text-xs text-slate-700 space-y-2 border-t border-slate-100 pt-3">
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-blue-800 shrink-0" />
-                  Pendampingan muthawif harian sesuai kebutuhan Anda
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                  <span>Pendampingan muthawif harian sesuai kebutuhan</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-blue-800 shrink-0" />
-                  City tour ziarah Thaif sejuk, Badar, dan Al-Ula
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                  <span>City tour ziarah Thaif sejuk, Badar, dan Al-Ula</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <Check className="w-4 h-4 text-blue-800 shrink-0" />
-                  Penjemputan bandara dengan armada pribadi tanpa repot
+                <li className="flex items-start gap-2">
+                  <Check className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                  <span>Penjemputan bandara dengan armada pribadi</span>
                 </li>
               </ul>
             </div>
@@ -662,15 +661,15 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
         </div>
       </section>
 
-      {/* Profil Muthawif & Keunggulan PMM */}
+      {/* Profil Muthawif & Visual HD */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-8 sm:gap-12 items-center">
-          <div className="space-y-4">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-10 items-center">
+          <div className="space-y-3.5 sm:space-y-4">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-bold uppercase">
               <Award className="w-3.5 h-3.5 text-blue-700" />
               Peran Sentral Muthawif
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-snug">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 leading-snug">
               Representasi Amanah Perjalanan Ibadah di Haramain
             </h2>
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
@@ -680,16 +679,16 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
               Kami hadir sebagai perpanjangan tangan yang berkomitmen menjaga reputasi dan kepercayaan, bertugas sesuai standar yang Anda harapkan.
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-2.5">
+            <div className="pt-2 flex flex-wrap gap-2 sm:gap-2.5">
               <button
                 onClick={() => setPage("muthawif")}
-                className="px-5 py-2.5 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors flex items-center gap-1.5"
+                className="px-4 sm:px-5 py-2.5 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors flex items-center gap-1.5"
               >
-                Lihat 14 Tugas Muthawif <ArrowRight className="w-3.5 h-3.5" />
+                14 Tugas Muthawif <ArrowRight className="w-3.5 h-3.5" />
               </button>
               <button
                 onClick={onOpenTransport}
-                className="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 font-bold text-xs transition-colors flex items-center gap-1.5"
+                className="px-4 sm:px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 font-bold text-xs transition-colors flex items-center gap-1.5"
               >
                 <Bus className="w-3.5 h-3.5 text-blue-700" /> Cek Tarif Mobil
               </button>
@@ -697,18 +696,18 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
           </div>
 
           {/* Kolase Visual HD */}
-          <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-slate-900 h-72 sm:h-96">
+          <div className="relative rounded-2xl overflow-hidden shadow-md border border-slate-200 bg-slate-900 h-60 sm:h-80 md:h-96">
             <img
               src={IMAGES.nabawi}
               alt="Masjid Nabawi Madinah"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
-            <div className="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-slate-950/80 backdrop-blur-md border border-slate-800 text-white text-xs">
-              <div className="font-bold text-sm text-slate-100 mb-1">
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 p-3.5 sm:p-4 rounded-xl bg-slate-950/85 backdrop-blur-md border border-slate-800 text-white text-xs">
+              <div className="font-bold text-xs sm:text-sm text-slate-100 mb-0.5">
                 Alumni Timur Tengah Berilmu
               </div>
-              <p className="text-slate-400 text-[11px]">
+              <p className="text-slate-400 text-[10px] sm:text-[11px]">
                 Universitas Al-Azhar Kairo, Universitas Islam Madinah, Ummul Qura Mekah, Sudan, Maroko & Tunisia.
               </p>
             </div>
@@ -717,48 +716,48 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
       </section>
 
       {/* 8 Layanan Terpadu */}
-      <section className="py-14 bg-slate-200/60 border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+      <section className="py-12 bg-slate-200/60 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
               <span className="text-xs font-extrabold text-blue-800 uppercase tracking-wider block mb-1">
                 Portofolio Jasa
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900">
                 Layanan Terpadu di Tanah Suci
               </h2>
             </div>
             <button
               onClick={() => setPage("jasa")}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-800 hover:text-blue-950"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-800 hover:text-blue-950 self-start sm:self-auto"
             >
               Buka Katalog Semua Layanan <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICES_LIST.map((item, idx) => (
               <div
                 key={idx}
                 className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between"
               >
-                <div className="h-32 relative overflow-hidden bg-slate-800">
+                <div className="h-28 sm:h-32 relative overflow-hidden bg-slate-800">
                   <img
                     src={item.img}
                     alt={item.n}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute top-2.5 right-2.5 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                  <div className="absolute top-2 right-2 bg-slate-900/85 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded">
                     {item.tag}
                   </div>
                 </div>
 
-                <div className="p-4 flex-1 flex flex-col justify-between">
+                <div className="p-3.5 sm:p-4 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="font-bold text-slate-900 text-sm mb-1.5">{item.n}</h3>
+                    <h3 className="font-bold text-slate-900 text-sm mb-1">{item.n}</h3>
                     <p className="text-slate-600 text-xs leading-relaxed">{item.desc}</p>
                   </div>
-                  <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-800">
+                  <div className="mt-3 pt-2.5 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-800">
                     <span onClick={() => setPage("jasa")} className="cursor-pointer hover:underline">
                       Rincian Layanan
                     </span>
@@ -773,9 +772,9 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
 
       {/* Bagian Tiket Kereta Cepat Haramain (HHR) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-xs">
+        <div className="bg-white rounded-2xl border border-slate-200 p-5 sm:p-8 shadow-xs">
           <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center">
-            <div className="lg:col-span-5 space-y-4">
+            <div className="lg:col-span-5 space-y-3 sm:space-y-4">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-900 text-xs font-bold uppercase">
                 <Train className="w-3.5 h-3.5 text-blue-800" />
                 Agen Resmi HHR
@@ -799,14 +798,14 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
                   Tabel Tarif Rute & Kenaikan Tiket HHR (Reyal Saudi - SAR)
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse min-w-[340px]">
+                  <table className="w-full text-left border-collapse min-w-[360px]">
                     <thead className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
                       <tr>
                         <th className="p-2.5">Rute & Kelas</th>
-                        <th className="p-2.5 text-center">Harga Dasar</th>
-                        <th className="p-2.5 text-center">Kenaikan 1</th>
-                        <th className="p-2.5 text-center">Kenaikan 2</th>
-                        <th className="p-2.5 text-center">Kenaikan 3</th>
+                        <th className="p-2.5 text-center">Dasar</th>
+                        <th className="p-2.5 text-center">Naik 1</th>
+                        <th className="p-2.5 text-center">Naik 2</th>
+                        <th className="p-2.5 text-center">Naik 3</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-[11px] sm:text-xs">
@@ -848,28 +847,28 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-14 bg-slate-200/50 border-t border-slate-200">
+      <section className="py-12 bg-slate-200/50 border-t border-slate-200">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-          <div className="text-center space-y-2">
+          <div className="text-center space-y-1.5">
             <span className="text-xs font-extrabold text-blue-800 uppercase tracking-wider">
               Informasi Umum
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900">
               Pertanyaan Seputar Layanan PMM
             </h2>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {FAQ_DATA.map((faq, idx) => (
               <details
                 key={idx}
-                className="group bg-white rounded-xl border border-slate-200 p-4 cursor-pointer"
+                className="group bg-white rounded-xl border border-slate-200 p-3.5 sm:p-4 cursor-pointer"
               >
                 <summary className="flex justify-between items-center font-bold text-slate-900 text-xs sm:text-sm select-none">
                   <span>{faq.q}</span>
                   <ChevronDown className="w-4 h-4 text-slate-400 group-open:rotate-180 transition-transform shrink-0 ml-2" />
                 </summary>
-                <p className="mt-3 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-3">
+                <p className="mt-2.5 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-2.5">
                   {faq.a}
                 </p>
               </details>
@@ -879,18 +878,18 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
       </section>
 
       {/* CTA Bottom Banner */}
-      <section className="bg-slate-950 text-white py-14 px-4 text-center border-t border-slate-800">
+      <section className="bg-slate-950 text-white py-12 px-4 text-center border-t border-slate-800">
         <div className="max-w-3xl mx-auto space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-extrabold">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold">
             Rencanakan Kebutuhan Umroh Anda Bersama PMM
           </h2>
           <p className="text-slate-400 text-xs sm:text-sm max-w-xl mx-auto">
             Diskusikan detail jadwal, kebutuhan muthawif, armada transportasi, atau paket lengkap dengan tim PMM langsung di Saudi.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row justify-center gap-2.5 pt-2 max-w-md mx-auto sm:max-w-none">
             <button
               onClick={() => setPage("simulator")}
-              className="bg-blue-800 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center gap-2"
+              className="bg-blue-800 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
             >
               <FileSpreadsheet className="w-4 h-4" /> Buka Simulator Biaya
             </button>
@@ -898,7 +897,7 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
               href={WA}
               target="_blank"
               rel="noreferrer"
-              className="bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 px-6 py-3 rounded-xl font-bold text-xs transition-all flex items-center gap-2"
+              className="bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 px-6 py-3 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2"
             >
               <PhoneCall className="w-4 h-4 text-blue-400" /> Hubungi WhatsApp
             </a>
@@ -914,33 +913,33 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
 // ----------------------------------------------------
 function MuthawifPage({ setPage }) {
   return (
-    <div className="py-10 sm:py-14 bg-slate-100 min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+    <div className="py-8 sm:py-14 bg-slate-100 min-h-screen">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-3">
+        <div className="text-center max-w-3xl mx-auto space-y-2.5">
           <span className="text-xs font-extrabold text-blue-800 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
             Layanan Utama PMM
           </span>
-          <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900">
             Cakupan Tugas & Tanggung Jawab Muthawif
           </h1>
-          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed px-2">
             Mendampingi jamaah sejak menginjakkan kaki di bandara hingga kembali pulang ke tanah air. Membantu segala kebutuhan ibadah dan menjaga ketenangan jamaah selama di Haramain.
           </p>
-          <div className="inline-block bg-white px-4 py-2 rounded-xl border border-slate-300 text-xs font-bold text-slate-800 shadow-xs">
+          <div className="inline-block bg-white px-3.5 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-800 shadow-xs">
             Ratib / Fee Resmi: <span className="text-blue-800 font-extrabold">280 s/d 300 SAR</span> per hari per grup
           </div>
         </div>
 
         {/* 14 Poin Cakupan Tugas */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {MUTHAWIF_DUTIES.map((d, i) => (
             <div
               key={i}
               className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs hover:border-blue-300 transition-all flex flex-col justify-between"
             >
               <div>
-                <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center justify-between mb-1.5">
                   <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-900 text-xs font-bold flex items-center justify-center">
                     {i + 1}
                   </span>
@@ -954,7 +953,7 @@ function MuthawifPage({ setPage }) {
         </div>
 
         {/* Komitmen Kerjasama */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-4 text-xs sm:text-sm leading-relaxed text-slate-700">
+        <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-3 sm:space-y-4 text-xs sm:text-sm leading-relaxed text-slate-700">
           <h2 className="text-base font-extrabold text-slate-900">
             Komitmen Perpanjangan Tangan
           </h2>
@@ -967,7 +966,7 @@ function MuthawifPage({ setPage }) {
           <div className="pt-2">
             <button
               onClick={() => setPage("simulator")}
-              className="px-6 py-3 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors inline-flex items-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors inline-flex items-center justify-center gap-2"
             >
               <FileSpreadsheet className="w-4 h-4" /> Masukkan Muthawif ke Estimasi Biaya
             </button>
@@ -985,8 +984,8 @@ function JasaPage({ setPayModal, onOpenTransport }) {
   const [tab, setTab] = useState("paket");
 
   return (
-    <div className="py-10 sm:py-14 bg-slate-100 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
+    <div className="py-8 sm:py-14 bg-slate-100 min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-extrabold text-blue-800 uppercase tracking-wider">
             Katalog Layanan PMM 1446 H
@@ -999,12 +998,12 @@ function JasaPage({ setPayModal, onOpenTransport }) {
           </p>
         </div>
 
-        {/* Tab Filter */}
-        <div className="flex justify-center overflow-x-auto pb-1">
-          <div className="inline-flex p-1 bg-slate-200 rounded-xl gap-1">
+        {/* Tab Filter (Horizontal Scroll on Mobile) */}
+        <div className="flex justify-start sm:justify-center overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <div className="inline-flex p-1 bg-slate-200 rounded-xl gap-1 shrink-0">
             {[
               { id: "paket", label: "Cakupan Paket Lengkap" },
-              { id: "ziarah", label: "Paket Ziarah & City Tour" },
+              { id: "ziarah", label: "Ziarah & City Tour" },
               { id: "exp", label: "Eksplorasi Tambahan" },
               { id: "jariyah", label: "Badal Umroh & Amal" },
             ].map((t) => (
@@ -1025,7 +1024,7 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 
         {/* Tab 1: Cakupan Paket Lengkap Dokumen PMM */}
         {tab === "paket" && (
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-6">
+          <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-5">
             <div className="max-w-3xl">
               <h2 className="text-base sm:text-lg font-extrabold text-slate-900">
                 Cakupan Standar Paket Lengkap (Airport to Airport)
@@ -1035,7 +1034,7 @@ function JasaPage({ setPayModal, onOpenTransport }) {
               </p>
             </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3">
               {[
                 "Visa Umroh Resmi + Tasreh Raudhah",
                 "Transportasi Selama di Arab Saudi",
@@ -1057,7 +1056,7 @@ function JasaPage({ setPayModal, onOpenTransport }) {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2.5 p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800"
+                  className="flex items-center gap-2 p-2.5 sm:p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-800"
                 >
                   <Check className="w-4 h-4 text-blue-800 shrink-0" />
                   <span>{item}</span>
@@ -1065,13 +1064,13 @@ function JasaPage({ setPayModal, onOpenTransport }) {
               ))}
             </div>
 
-            <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
-              <div className="text-xs text-slate-500">
+            <div className="pt-3 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="text-[11px] sm:text-xs text-slate-500">
                 * Rincian dapat disesuaikan pada kalkulator simulator sesuai kebutuhan rombongan.
               </div>
               <button
                 onClick={onOpenTransport}
-                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1.5"
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
               >
                 <Bus className="w-3.5 h-3.5 text-blue-800" /> Lihat Tabel Tarif Transportasi
               </button>
@@ -1081,13 +1080,13 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 
         {/* Tab 2: Ziarah dengan Gambar HD */}
         {tab === "ziarah" && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {CT_DATA.map((item, idx) => (
               <div
                 key={idx}
                 className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs flex flex-col justify-between"
               >
-                <div className="h-44 relative overflow-hidden bg-slate-800">
+                <div className="h-40 sm:h-44 relative overflow-hidden bg-slate-800">
                   <img
                     src={item.img}
                     alt={item.name}
@@ -1096,15 +1095,15 @@ function JasaPage({ setPayModal, onOpenTransport }) {
                   <div className="absolute top-2.5 right-2.5 bg-blue-900 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-xs">
                     Mulai {item.sar} SAR
                   </div>
-                  <div className="absolute bottom-2.5 left-2.5 bg-slate-950/80 backdrop-blur-xs text-white text-[11px] px-2 py-0.5 rounded font-medium">
+                  <div className="absolute bottom-2.5 left-2.5 bg-slate-950/80 backdrop-blur-xs text-white text-[10px] sm:text-[11px] px-2 py-0.5 rounded font-medium">
                     {item.min}
                   </div>
                 </div>
 
-                <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between space-y-3 sm:space-y-4">
                   <div>
                     <h3 className="font-bold text-slate-900 text-base mb-1">{item.name}</h3>
-                    <p className="text-slate-600 text-xs leading-relaxed mb-3">{item.desc}</p>
+                    <p className="text-slate-600 text-xs leading-relaxed mb-2.5">{item.desc}</p>
                     <div className="text-[11px] font-semibold text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-100">
                       Fasilitas: {item.bonus}
                     </div>
@@ -1125,7 +1124,7 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 
         {/* Tab 3: Experience */}
         {tab === "exp" && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {EX_DATA.map((item, idx) => (
               <div
                 key={idx}
@@ -1144,7 +1143,7 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 
                 <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                   <div>
-                    <div className="text-[10px] text-slate-400 mb-1">{item.min}</div>
+                    <div className="text-[10px] text-slate-400 mb-0.5">{item.min}</div>
                     <h3 className="font-bold text-slate-900 text-sm mb-1">{item.name}</h3>
                     <p className="text-slate-600 text-xs leading-relaxed mb-2">{item.desc}</p>
                     <div className="text-[11px] font-medium text-slate-700">✓ {item.bonus}</div>
@@ -1165,18 +1164,18 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 
         {/* Tab 4: Ibadah Jariyah */}
         {tab === "jariyah" && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {IB_DATA.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4"
+                className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4"
               >
                 <div>
                   <div className="inline-block text-xs font-bold text-blue-900 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 mb-2">
                     {item.sar} SAR / Paket
                   </div>
                   <h3 className="font-bold text-slate-900 text-base mb-1">{item.name}</h3>
-                  <p className="text-slate-600 text-xs leading-relaxed mb-3">{item.desc}</p>
+                  <p className="text-slate-600 text-xs leading-relaxed mb-2.5">{item.desc}</p>
                   <div className="text-[11px] text-slate-700 font-medium bg-slate-50 p-2 rounded-lg border border-slate-100">
                     Dokumentasi: {item.bonus}
                   </div>
@@ -1199,10 +1198,13 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 }
 
 // ----------------------------------------------------
-// SIMULATOR BIAYA & HPP RESMI (RESPONSIF MOBILE)
+// SIMULATOR BIAYA & HPP RESMI (OPTIMAL MOBILE)
 // ----------------------------------------------------
 function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
   const [isStandardLA, setIsStandardLA] = useState(true);
+
+  // Tab di Mobile: Form Input vs Hasil Estimasi
+  const [mobileTab, setMobileTab] = useState("form"); // "form" | "result"
 
   // Parameter Rombongan
   const [pax, setPax] = useState(4);
@@ -1365,7 +1367,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
     setRes(resultObj);
 
     try {
-      confetti({ particleCount: 35, spread: 50, origin: { y: 0.85 } });
+      confetti({ particleCount: 30, spread: 45, origin: { y: 0.85 } });
     } catch (e) {}
   };
 
@@ -1374,25 +1376,24 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
   }, []);
 
   return (
-    <div className="py-6 sm:py-8 bg-slate-100 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <div className="py-5 sm:py-8 bg-slate-100 min-h-screen pb-24 lg:pb-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-6">
         {/* Header Bar */}
-        <div className="bg-white p-5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
-            <div className="text-[11px] sm:text-xs font-extrabold text-blue-800 uppercase tracking-wider">
+            <div className="text-[11px] font-extrabold text-blue-800 uppercase tracking-wider">
               Kalkulator Biaya Resmi 1446 H
             </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 mt-0.5">
+            <h1 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5">
               Simulator HPP Land Arrangement Umroh
             </h1>
-            <p className="text-slate-500 text-xs mt-1">
-              Data tarif resmi PT. Katiara Muda Jelajah (PMM). Unduh proposal penawaran PDF seketika.
+            <p className="text-slate-500 text-xs mt-0.5">
+              Data tarif resmi PT. Katiara Muda Jelajah (PMM).
             </p>
           </div>
 
           {/* Preset Toggle */}
-          <div className="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200 text-xs font-semibold self-start md:self-auto">
-            <span className="text-slate-500 px-1 text-[11px]">Mode:</span>
+          <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold self-start md:self-auto">
             <button
               onClick={() => applyStandardLA(true)}
               className={`px-3 py-1.5 rounded-lg transition-all text-xs ${
@@ -1416,16 +1417,49 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
           </div>
         </div>
 
+        {/* Mobile View Toggle: Form Input vs Rincian Hasil */}
+        <div className="lg:hidden flex bg-white p-1 rounded-xl border border-slate-200 shadow-xs">
+          <button
+            onClick={() => setMobileTab("form")}
+            className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all ${
+              mobileTab === "form"
+                ? "bg-blue-800 text-white shadow-xs"
+                : "text-slate-600"
+            }`}
+          >
+            1. Form Rencana
+          </button>
+          <button
+            onClick={() => setMobileTab("result")}
+            className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+              mobileTab === "result"
+                ? "bg-blue-800 text-white shadow-xs"
+                : "text-blue-900"
+            }`}
+          >
+            <span>2. Hasil HPP</span>
+            {res && (
+              <span className="px-1.5 py-0.2 rounded-full bg-blue-100 text-blue-950 text-[10px]">
+                {fIDR(res.hpp)}
+              </span>
+            )}
+          </button>
+        </div>
+
         <div className="grid lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           {/* Kolom Kiri: Form Konfigurasi (7 Kolom) */}
-          <div className="lg:col-span-7 space-y-4">
+          <div
+            className={`lg:col-span-7 space-y-3.5 sm:space-y-4 ${
+              mobileTab === "form" ? "block" : "hidden lg:block"
+            }`}
+          >
             {/* 1. Pengaturan Dasar */}
             <SectionCard
-              title="1. Pengaturan Jumlah Jamaah & Kurs Acuan"
+              title="1. Jumlah Jamaah & Kurs Acuan"
               open={op.set}
               onToggle={() => tog("set")}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
                 <CounterInput
                   label="Jumlah Jamaah"
                   sub="Total orang dalam rombongan"
@@ -1448,7 +1482,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-3 border-t border-slate-100">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-slate-100">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Kurs 1 SAR ke IDR
@@ -1487,11 +1521,11 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
             {/* 2. Tiket, Visa & Kereta Cepat HHR */}
             <SectionCard
-              title="2. Tiket, Visa Umroh & Kereta Cepat (HHR)"
+              title="2. Tiket, Visa & Kereta Cepat (HHR)"
               open={op.paxs}
               onToggle={() => tog("paxs")}
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
                     Tiket Pesawat PP (IDR)
@@ -1508,7 +1542,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Visa Umroh + Tasreh Raudhah (USD/pax)
+                    Visa Umroh + Tasreh (USD/pax)
                   </label>
                   <input
                     type="number"
@@ -1521,10 +1555,10 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               </div>
 
               {/* Tabel Tier Dinamis HHR */}
-              <div className="mt-4 pt-3 border-t border-slate-100 space-y-2">
+              <div className="mt-3.5 pt-3 border-t border-slate-100 space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs font-bold text-slate-800">
-                    Tiket Kereta Cepat Haramain (Pilih Rute & Tier Harga)
+                    Kereta Cepat Haramain (Pilih Rute & Tier)
                   </span>
                   <span className="text-[10px] text-slate-500">Harga SAR / pax</span>
                 </div>
@@ -1585,9 +1619,9 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               </div>
 
               {/* Komponen Logistik Jamaah */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mt-4 pt-3 border-t border-slate-100">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mt-3 pt-3 border-t border-slate-100">
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 mb-1 truncate">
                     SISKOPATUH (IDR)
                   </label>
                   <input
@@ -1598,7 +1632,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 mb-1 truncate">
                     Meals (SAR/pax)
                   </label>
                   <input
@@ -1609,7 +1643,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 mb-1 truncate">
                     Perlengkapan (IDR)
                   </label>
                   <input
@@ -1620,7 +1654,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-semibold text-slate-600 mb-1">
+                  <label className="block text-[11px] font-semibold text-slate-600 mb-1 truncate">
                     Asuransi (IDR)
                   </label>
                   <input
@@ -1633,104 +1667,104 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               </div>
             </SectionCard>
 
-            {/* 3. Akomodasi Hotel Mekah & Madinah */}
+            {/* 3. Akomodasi Hotel Mekah & Madinah (Clean Mobile Layout) */}
             <SectionCard
-              title="3. Akomodasi Hotel Mekah & Madinah"
+              title="3. Hotel Mekah & Madinah"
               open={op.htl}
               onToggle={() => tog("htl")}
             >
-              <div className="space-y-4">
+              <div className="space-y-3.5">
                 {/* Mekah */}
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                <div className="p-3 sm:p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-1.5">
                     <span className="text-xs font-bold text-blue-900">Hotel Mekah</span>
                     <input
                       type="text"
                       placeholder="Nama Hotel (opsional)"
                       value={hmek.name}
                       onChange={(e) => setHmek({ ...hmek, name: e.target.value })}
-                      className="text-xs px-2 py-1 border border-slate-200 rounded bg-white w-full sm:w-44 text-left sm:text-right"
+                      className="text-xs px-2.5 py-1.5 border border-slate-200 rounded bg-white w-full sm:w-44"
                     />
                   </div>
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    <div>
-                      <label className="block text-[11px] text-slate-500 mb-1">Malam</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+                    <div className="flex sm:block items-center justify-between">
+                      <label className="text-[11px] text-slate-500 sm:mb-1">Jumlah Malam</label>
                       <input
                         type="number"
                         min="0"
                         value={hmek.nights}
                         onChange={(e) => setHmek({ ...hmek, nights: Number(e.target.value) })}
-                        className="w-full p-2 text-xs border rounded bg-white font-bold text-center"
+                        className="w-24 sm:w-full p-1.5 text-xs border rounded bg-white font-bold text-center"
                       />
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-slate-500 mb-1">Tipe Kamar</label>
+                    <div className="flex sm:block items-center justify-between">
+                      <label className="text-[11px] text-slate-500 sm:mb-1">Tipe Kamar</label>
                       <select
                         value={hmek.type}
                         onChange={(e) => setHmek({ ...hmek, type: e.target.value })}
-                        className="w-full p-2 text-xs border rounded bg-white font-semibold"
+                        className="w-36 sm:w-full p-1.5 text-xs border rounded bg-white font-semibold"
                       >
                         <option value="QUAD">Quad (4 Pax)</option>
                         <option value="TRIPLE">Triple (3 Pax)</option>
                         <option value="DOUBLE">Double (2 Pax)</option>
                       </select>
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-slate-500 mb-1">SAR / Kamar</label>
+                    <div className="flex sm:block items-center justify-between">
+                      <label className="text-[11px] text-slate-500 sm:mb-1">SAR / Kamar</label>
                       <input
                         type="number"
                         min="0"
                         value={hmek.sar}
                         onChange={(e) => setHmek({ ...hmek, sar: Number(e.target.value) })}
-                        className="w-full p-2 text-xs border rounded bg-white font-bold text-blue-800 text-center"
+                        className="w-28 sm:w-full p-1.5 text-xs border rounded bg-white font-bold text-blue-800 text-center"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Madinah */}
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
-                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                <div className="p-3 sm:p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2.5">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-1.5">
                     <span className="text-xs font-bold text-blue-900">Hotel Madinah</span>
                     <input
                       type="text"
                       placeholder="Nama Hotel (opsional)"
                       value={hmad.name}
                       onChange={(e) => setHmad({ ...hmad, name: e.target.value })}
-                      className="text-xs px-2 py-1 border border-slate-200 rounded bg-white w-full sm:w-44 text-left sm:text-right"
+                      className="text-xs px-2.5 py-1.5 border border-slate-200 rounded bg-white w-full sm:w-44"
                     />
                   </div>
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    <div>
-                      <label className="block text-[11px] text-slate-500 mb-1">Malam</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+                    <div className="flex sm:block items-center justify-between">
+                      <label className="text-[11px] text-slate-500 sm:mb-1">Jumlah Malam</label>
                       <input
                         type="number"
                         min="0"
                         value={hmad.nights}
                         onChange={(e) => setHmad({ ...hmad, nights: Number(e.target.value) })}
-                        className="w-full p-2 text-xs border rounded bg-white font-bold text-center"
+                        className="w-24 sm:w-full p-1.5 text-xs border rounded bg-white font-bold text-center"
                       />
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-slate-500 mb-1">Tipe Kamar</label>
+                    <div className="flex sm:block items-center justify-between">
+                      <label className="text-[11px] text-slate-500 sm:mb-1">Tipe Kamar</label>
                       <select
                         value={hmad.type}
                         onChange={(e) => setHmad({ ...hmad, type: e.target.value })}
-                        className="w-full p-2 text-xs border rounded bg-white font-semibold"
+                        className="w-36 sm:w-full p-1.5 text-xs border rounded bg-white font-semibold"
                       >
                         <option value="QUAD">Quad (4 Pax)</option>
                         <option value="TRIPLE">Triple (3 Pax)</option>
                         <option value="DOUBLE">Double (2 Pax)</option>
                       </select>
                     </div>
-                    <div>
-                      <label className="block text-[11px] text-slate-500 mb-1">SAR / Kamar</label>
+                    <div className="flex sm:block items-center justify-between">
+                      <label className="text-[11px] text-slate-500 sm:mb-1">SAR / Kamar</label>
                       <input
                         type="number"
                         min="0"
                         value={hmad.sar}
                         onChange={(e) => setHmad({ ...hmad, sar: Number(e.target.value) })}
-                        className="w-full p-2 text-xs border rounded bg-white font-bold text-blue-800 text-center"
+                        className="w-28 sm:w-full p-1.5 text-xs border rounded bg-white font-bold text-blue-800 text-center"
                       />
                     </div>
                   </div>
@@ -1738,15 +1772,12 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               </div>
             </SectionCard>
 
-            {/* 4. Handling & Muthawif (17 Poin Dokumen) */}
+            {/* 4. Handling & Muthawif */}
             <SectionCard
-              title={`4. Layanan Handling & Muthawif (${hdl.filter((h) => h.on).length} Aktif)`}
+              title={`4. Handling & Muthawif (${hdl.filter((h) => h.on).length} Aktif)`}
               open={op.hdl}
               onToggle={() => tog("hdl")}
             >
-              <div className="text-[11px] text-slate-500 mb-3">
-                Komponen handling resmi di bawah ini dapat diaktifkan sesuai kebutuhan:
-              </div>
               <div className="space-y-1.5 max-h-72 overflow-y-auto pr-1">
                 {hdl.map((h, i) => (
                   <div
@@ -1758,7 +1789,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                     }`}
                   >
                     <div
-                      className="flex items-center gap-2 flex-1 cursor-pointer pr-2"
+                      className="flex items-center gap-2 flex-1 cursor-pointer pr-1.5"
                       onClick={() => togH(i)}
                     >
                       <div
@@ -1768,20 +1799,20 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       >
                         {h.on ? "✓" : ""}
                       </div>
-                      <div>
-                        <div className="font-semibold text-slate-900">{h.label}</div>
-                        <div className="text-[10px] text-slate-500 line-clamp-1">{h.desc}</div>
+                      <div className="min-w-0">
+                        <div className="font-semibold text-slate-900 truncate">{h.label}</div>
+                        <div className="text-[10px] text-slate-400 truncate hidden sm:block">{h.desc}</div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 shrink-0">
+                    <div className="flex items-center gap-1.5 shrink-0">
                       <input
                         type="number"
                         value={h.sar}
                         onChange={(e) => updH(i, e.target.value)}
                         disabled={h.mode === "dyn"}
-                        className="w-14 sm:w-16 p-1 text-right text-xs font-bold text-blue-900 border border-slate-200 rounded bg-white"
+                        className="w-14 p-1 text-right text-xs font-bold text-blue-900 border border-slate-200 rounded bg-white"
                       />
-                      <span className="text-[10px] text-slate-400 w-14 sm:w-16 text-right">
+                      <span className="text-[10px] text-slate-400 w-12 sm:w-14 text-right truncate">
                         {h.info}
                       </span>
                     </div>
@@ -1792,20 +1823,20 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
             {/* 5. Kendaraan & Rute */}
             <SectionCard
-              title={`5. Kendaraan & Rute Transportasi (${selR.length} Rute)`}
+              title={`5. Kendaraan & Rute (${selR.length} Rute)`}
               open={op.trn}
               onToggle={() => tog("trn")}
             >
-              <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
+              <div className="mb-3">
+                <div className="flex justify-between items-center mb-1.5">
                   <label className="text-xs font-bold text-slate-800">
-                    Pilih Jenis Armada:
+                    Jenis Armada:
                   </label>
                   <button
                     onClick={onOpenTransport}
                     className="text-xs font-bold text-blue-800 hover:underline flex items-center gap-1"
                   >
-                    <Bus className="w-3.5 h-3.5" /> Tabel Mobil Lengkap
+                    <Bus className="w-3.5 h-3.5" /> Tabel Mobil
                   </button>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -1813,25 +1844,24 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                     <button
                       key={v.n}
                       onClick={() => setVIdx(i)}
-                      className={`p-2.5 rounded-xl border text-left transition-all ${
+                      className={`p-2 rounded-xl border text-left transition-all ${
                         vIdx === i
                           ? "bg-blue-50 border-blue-800 text-blue-950 ring-1 ring-blue-800"
                           : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
                       }`}
                     >
-                      <div className="text-xs font-bold">{v.n}</div>
+                      <div className="text-xs font-bold truncate">{v.n}</div>
                       <div className="text-[10px] text-slate-500">{v.s} Seats</div>
-                      <div className="text-[9px] text-blue-700 font-semibold">{v.tag}</div>
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-800 mb-2">
+                <label className="block text-xs font-bold text-slate-800 mb-1.5">
                   Rute Operasional ({VEH[vIdx].n}):
                 </label>
-                <div className="space-y-1.5 max-h-60 overflow-y-auto pr-1">
+                <div className="space-y-1 max-h-56 overflow-y-auto pr-1">
                   {RT.map((r, i) => {
                     const isSelected = selR.includes(i);
                     const cost = VEH[vIdx].p[i] || 0;
@@ -1845,7 +1875,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                             : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
                         }`}
                       >
-                        <div className="flex items-center gap-2 pr-2">
+                        <div className="flex items-center gap-2 pr-1 truncate">
                           <div
                             className={`w-4 h-4 rounded flex items-center justify-center text-[10px] text-white shrink-0 ${
                               isSelected ? "bg-blue-800" : "bg-slate-300"
@@ -1853,7 +1883,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                           >
                             {isSelected ? "✓" : ""}
                           </div>
-                          <span className="line-clamp-1">{r}</span>
+                          <span className="truncate">{r}</span>
                         </div>
                         <span className="font-bold text-blue-900 shrink-0">{cost} SAR</span>
                       </div>
@@ -1869,12 +1899,9 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               open={op.mgn}
               onToggle={() => tog("mgn")}
             >
-              <div className="text-[11px] text-slate-500 mb-3">
-                Margin profit (persen) di atas HPP untuk menghasilkan rekomendasi harga jual per kamar:
-              </div>
-              <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
+              <div className="grid grid-cols-3 gap-2">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 mb-1 text-center">
                     QUAD (Ber-4)
                   </label>
                   <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white">
@@ -1882,16 +1909,14 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       type="number"
                       value={mgn.quad}
                       onChange={(e) => setMgn({ ...mgn, quad: Number(e.target.value) })}
-                      className="w-full p-2 text-xs text-center font-bold text-blue-900 outline-none"
+                      className="w-full p-1.5 text-xs text-center font-bold text-blue-900 outline-none"
                     />
-                    <span className="bg-slate-100 px-2 py-2 text-xs font-bold text-slate-500">
-                      %
-                    </span>
+                    <span className="bg-slate-100 px-2 py-1.5 text-xs text-slate-500 font-bold">%</span>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 mb-1 text-center">
                     TRIPLE (Ber-3)
                   </label>
                   <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white">
@@ -1899,16 +1924,14 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       type="number"
                       value={mgn.triple}
                       onChange={(e) => setMgn({ ...mgn, triple: Number(e.target.value) })}
-                      className="w-full p-2 text-xs text-center font-bold text-blue-900 outline-none"
+                      className="w-full p-1.5 text-xs text-center font-bold text-blue-900 outline-none"
                     />
-                    <span className="bg-slate-100 px-2 py-2 text-xs font-bold text-slate-500">
-                      %
-                    </span>
+                    <span className="bg-slate-100 px-2 py-1.5 text-xs text-slate-500 font-bold">%</span>
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label className="block text-[11px] font-bold text-slate-700 mb-1 text-center">
                     DOUBLE (Ber-2)
                   </label>
                   <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white">
@@ -1916,11 +1939,9 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       type="number"
                       value={mgn.double}
                       onChange={(e) => setMgn({ ...mgn, double: Number(e.target.value) })}
-                      className="w-full p-2 text-xs text-center font-bold text-blue-900 outline-none"
+                      className="w-full p-1.5 text-xs text-center font-bold text-blue-900 outline-none"
                     />
-                    <span className="bg-slate-100 px-2 py-2 text-xs font-bold text-slate-500">
-                      %
-                    </span>
+                    <span className="bg-slate-100 px-2 py-1.5 text-xs text-slate-500 font-bold">%</span>
                   </div>
                 </div>
               </div>
@@ -1928,27 +1949,34 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
             {/* Tombol Re-kalkulasi */}
             <button
-              onClick={calculateHPP}
+              onClick={() => {
+                calculateHPP();
+                setMobileTab("result");
+              }}
               className="w-full py-3.5 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2"
             >
-              <FileSpreadsheet className="w-4 h-4" /> RE-KALKULASI ESTIMASI HPP
+              <FileSpreadsheet className="w-4 h-4" /> HITUNG ESTIMASI HPP
             </button>
           </div>
 
           {/* Kolom Kanan: Ringkasan Sticky (5 Kolom) */}
-          <div className="lg:col-span-5 sticky top-24 space-y-4">
+          <div
+            className={`lg:col-span-5 lg:sticky lg:top-24 space-y-3.5 sm:space-y-4 ${
+              mobileTab === "result" ? "block" : "hidden lg:block"
+            }`}
+          >
             {res && (
               <>
                 {/* Kartu HPP Utama */}
-                <div className="bg-slate-900 text-white p-5 sm:p-6 rounded-2xl shadow-lg border border-slate-800">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">
-                    Total Estimasi HPP / Pax
+                <div className="bg-slate-900 text-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-800">
+                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">
+                    Estimasi HPP per Jamaah
                   </div>
                   <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-300 tracking-tight mb-2">
                     {fIDR(res.hpp)}
                     <span className="text-xs font-normal text-slate-400"> / pax</span>
                   </div>
-                  <div className="text-xs text-slate-300 flex flex-wrap gap-2 pt-1 border-t border-slate-800">
+                  <div className="text-xs text-slate-300 flex flex-wrap gap-1.5 pt-1.5 border-t border-slate-800">
                     <span className="bg-slate-800 px-2 py-0.5 rounded text-[11px]">
                       {pax} Jamaah
                     </span>
@@ -1956,14 +1984,14 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       {res.vehName}
                     </span>
                     <span className="bg-slate-800 px-2 py-0.5 rounded text-[11px]">
-                      {hProg} Hari Program
+                      {hProg} Hari
                     </span>
                   </div>
                 </div>
 
                 {/* Rincian Komponen Biaya */}
                 <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2 text-xs">
-                  <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-1.5">
                     <span className="font-bold text-slate-900 uppercase tracking-wider text-[11px]">
                       Rincian Biaya per Jamaah
                     </span>
@@ -2014,7 +2042,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                 {/* Rekomendasi Harga Jual Konsumen */}
                 <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs space-y-2">
                   <span className="text-[11px] font-bold text-slate-900 uppercase tracking-wider block">
-                    Rekomendasi Harga Jual dengan Margin
+                    Rekomendasi Harga Jual
                   </span>
                   <PriceTierCard tier="QUAD (Kamar Ber-4)" margin={mgn.quad} price={res.quad} />
                   <PriceTierCard tier="TRIPLE (Kamar Ber-3)" margin={mgn.triple} price={res.triple} />
@@ -2039,7 +2067,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       className="py-2.5 px-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5"
                     >
                       <PhoneCall className="w-3.5 h-3.5 text-blue-800" />
-                      Konsultasi WA
+                      Konsultasi
                     </a>
                     <button
                       onClick={() =>
@@ -2052,7 +2080,17 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       }
                       className="py-2.5 px-3 rounded-xl bg-blue-800 hover:bg-blue-900 text-white text-xs font-bold text-center transition-colors shadow-xs"
                     >
-                      Booking / Konfirmasi
+                      Booking
+                    </button>
+                  </div>
+
+                  {/* Tombol Kembali ke Form Input di Mobile */}
+                  <div className="lg:hidden pt-1">
+                    <button
+                      onClick={() => setMobileTab("form")}
+                      className="w-full py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 underline"
+                    >
+                      ← Kembali edit parameter rombongan
                     </button>
                   </div>
                 </div>
@@ -2070,13 +2108,13 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 // ----------------------------------------------------
 function TentangPage({ setPage }) {
   return (
-    <div className="py-10 sm:py-16 bg-slate-100 min-h-screen">
+    <div className="py-8 sm:py-16 bg-slate-100 min-h-screen">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-        <div className="bg-white p-6 sm:p-12 rounded-2xl border border-slate-200 shadow-xs space-y-6">
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 border-b border-slate-100 pb-6 sm:pb-8">
+        <div className="bg-white p-5 sm:p-10 rounded-2xl border border-slate-200 shadow-xs space-y-5">
+          <div className="flex flex-col sm:flex-row items-center gap-4 border-b border-slate-100 pb-6">
             <img src={LOGO} alt="PMM" className="h-12 sm:h-14 w-auto object-contain" />
             <div className="text-center sm:text-left">
-              <h1 className="text-xl sm:text-3xl font-extrabold text-slate-900">
+              <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900">
                 Persatuan Muthawif Muda
               </h1>
               <p className="text-xs sm:text-sm font-semibold text-blue-800 mt-0.5">
@@ -2085,7 +2123,7 @@ function TentangPage({ setPage }) {
             </div>
           </div>
 
-          <div className="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3 sm:space-y-4">
+          <div className="text-xs sm:text-sm text-slate-700 leading-relaxed space-y-3">
             <p>
               <strong>Persatuan Muthawif Muda (PMM)</strong> adalah tim kolaboratif yang fokus pada penyediaan Muthawif (pembimbing ibadah umroh & haji), layanan land arrangement (LA) umrah, handling, konsultasi umrah mandiri, dan jasa lain yang diperlukan oleh biro perjalanan maupun jamaah perseorangan.
             </p>
@@ -2098,7 +2136,7 @@ function TentangPage({ setPage }) {
           </div>
 
           {/* Legalitas Box */}
-          <div className="bg-slate-50 p-4 sm:p-6 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs">
+          <div className="bg-slate-50 p-4 sm:p-5 rounded-xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
             <div>
               <span className="text-slate-500 block">Badan Usaha:</span>
               <span className="font-bold text-slate-900">PT. Katiara Muda Jelajah</span>
@@ -2119,11 +2157,11 @@ function TentangPage({ setPage }) {
         </div>
 
         {/* Media Sosial & Kanal Komunikasi */}
-        <div className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+        <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-4">
           <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
             Kanal Komunikasi Resmi
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-3">
             <SocialCard label="WhatsApp 1" val={WA_PHONE} href={`https://wa.me/6282155444787`} />
             <SocialCard label="WhatsApp 2" val={WA2_PHONE} href={`https://wa.me/6282214326480`} />
             <SocialCard label="Instagram" val="@muthawif.muda" href={IG} />
@@ -2152,7 +2190,7 @@ function TransportMatrixModal({ onClose }) {
         <div className="p-4 sm:p-5 border-b border-slate-200 flex justify-between items-center bg-slate-900 text-white rounded-t-2xl">
           <div>
             <h2 className="font-bold text-sm sm:text-base">
-              Tabel Tarif Resmi Transportasi Darat (Reyal Saudi - SAR)
+              Tabel Tarif Resmi Transportasi Darat (SAR)
             </h2>
             <div className="text-[10px] sm:text-[11px] text-slate-400">
               Dokumen Resmi PMM Musim 1446 H / 2024 - 2025 M
@@ -2306,7 +2344,7 @@ function CounterInput({ label, sub, val, min, max, unit, onDec, onInc }) {
         <button
           onClick={onDec}
           disabled={val <= min}
-          className="w-10 sm:w-9 h-9 sm:h-8 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-r border-slate-200 flex items-center justify-center"
+          className="w-10 sm:w-9 h-8 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-r border-slate-200 flex items-center justify-center"
         >
           -
         </button>
@@ -2316,7 +2354,7 @@ function CounterInput({ label, sub, val, min, max, unit, onDec, onInc }) {
         <button
           onClick={onInc}
           disabled={val >= max}
-          className="w-10 sm:w-9 h-9 sm:h-8 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-l border-slate-200 flex items-center justify-center"
+          className="w-10 sm:w-9 h-8 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-l border-slate-200 flex items-center justify-center"
         >
           +
         </button>
@@ -2335,7 +2373,7 @@ function SectionCard({ title, open, onToggle, children }) {
         <span className="font-bold text-slate-900 text-xs sm:text-sm">{title}</span>
         <span className="text-slate-400 text-xs">{open ? "▲" : "▼"}</span>
       </div>
-      {open && <div className="p-4 sm:p-5 border-t border-slate-100">{children}</div>}
+      {open && <div className="p-3.5 sm:p-5 border-t border-slate-100">{children}</div>}
     </div>
   );
 }
@@ -2343,17 +2381,17 @@ function SectionCard({ title, open, onToggle, children }) {
 function SummaryRow({ label, val }) {
   return (
     <div className="flex justify-between items-center py-0.5 border-b border-slate-50">
-      <span className="text-slate-600">{label}</span>
-      <span className="font-semibold text-slate-900">{fIDR(val)}</span>
+      <span className="text-slate-600 truncate mr-2">{label}</span>
+      <span className="font-semibold text-slate-900 shrink-0">{fIDR(val)}</span>
     </div>
   );
 }
 
 function PriceTierCard({ tier, margin, price }) {
   return (
-    <div className="flex items-center justify-between p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+    <div className="flex items-center justify-between p-2 sm:p-2.5 rounded-lg bg-slate-50 border border-slate-200">
       <div>
-        <div className="font-bold text-slate-900 text-xs">{tier}</div>
+        <div className="font-bold text-slate-900 text-[11px] sm:text-xs">{tier}</div>
         <div className="text-[10px] text-blue-800 font-medium">Margin {margin}%</div>
       </div>
       <div className="font-extrabold text-xs sm:text-sm text-slate-900">{fIDR(price)}</div>
@@ -2367,20 +2405,20 @@ function SocialCard({ label, val, href }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-300 transition-all block"
+      className="p-3 sm:p-3.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-slate-300 transition-all block"
     >
       <div className="text-[10px] text-slate-400 font-medium">{label}</div>
-      <div className="text-xs font-bold text-slate-800 mt-0.5">{val}</div>
+      <div className="text-xs font-bold text-slate-800 mt-0.5 truncate">{val}</div>
     </a>
   );
 }
 
 function Footer({ setPage }) {
   return (
-    <footer className="bg-slate-950 text-slate-400 py-10 border-t border-slate-800 text-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-center sm:text-left">
+    <footer className="bg-slate-950 text-slate-400 py-8 sm:py-10 border-t border-slate-800 text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-center sm:text-left">
+          <div>
             <div className="text-white font-extrabold text-sm">
               PERSATUAN MUTHAWIF MUDA
             </div>
@@ -2405,9 +2443,9 @@ function Footer({ setPage }) {
           </div>
         </div>
 
-        <div className="pt-4 border-t border-slate-900 text-[11px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div className="pt-3 border-t border-slate-900 text-[11px] text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2">
           <span>© 1441 - 1446 H PMM Indonesia. Hak Cipta Dilindungi.</span>
-          <div className="space-x-4">
+          <div className="space-x-3 sm:space-x-4">
             <button onClick={() => setPage("home")} className="hover:text-white">
               Beranda
             </button>
