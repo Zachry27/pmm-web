@@ -5,9 +5,25 @@ export const IG = "https://www.instagram.com/muthawif.muda";
 export const TK = "https://www.tiktok.com/@muthawif.muda";
 export const FB = "https://www.facebook.com/profile.php?id=100090863117392";
 
+// Gambar Premium HD Unsplash
+export const IMAGES = {
+  hero: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1920&q=80",
+  kaaba: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=80",
+  nabawi: "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=1200&q=80",
+  thaif: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
+  alula: "https://images.unsplash.com/photo-1609825488888-3a766db05542?auto=format&fit=crop&w=800&q=80",
+  badar: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80",
+  jeddah: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+  tahajud: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80",
+  bus: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80",
+  train: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
+  csAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80",
+  muthawifAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80"
+};
+
 // Transportasi 7 armada x 10 rute resmi dari dokumen PDF PMM 1446H
 export const VEH = [
-  { n: "Sedan", s: "2-3", tag: "Private / Hemat", p: [300, 250, 150, 650, 550, 200, 350, 150, 200, 500] },
+  { n: "Sedan VIP", s: "2-3", tag: "Private / Couple", p: [300, 250, 150, 650, 550, 200, 350, 150, 200, 500] },
   { n: "GMC Yukon 2019", s: "3-5", tag: "Kenyamanan VIP", p: [400, 350, 250, 850, 900, 250, 450, 250, 250, 1000] },
   { n: "GMC Yukon 2023", s: "3-5", tag: "Premium Eksekutif", p: [530, 430, 300, 750, 1100, 350, 500, 300, 300, 1200] },
   { n: "Hyundai H1 / Staria", s: "7-9", tag: "Pilihan Keluarga", p: [300, 300, 200, 900, 700, 270, 400, 200, 200, 700] },
@@ -108,32 +124,32 @@ export const MUTHAWIF_DUTIES = [
 
 // Layanan Utama
 export const SERVICES_LIST = [
-  { n: "Muthawif Berpengalaman", desc: "Alumni Timur Tengah (Al-Azhar Mesir, Madinah, Ummul Qura) fasih bahasa Arab dan fiqih manasik.", tag: "Prioritas" },
-  { n: "Visa Umroh & Tasreh Raudhah", desc: "Penerbitan visa umroh resmi Kementrian Haji KSA via muassasah terpercaya, sudah termasuk tasreh Raudhah.", tag: "Resmi KSA" },
-  { n: "Transportasi Darat di Saudi", desc: "Armada Sedan, GMC Yukon, Hyundai H1/Staria, Hiace, Coaster hingga Big Bus Mercedes 45 seat.", tag: "Armada Lengkap" },
-  { n: "Booking Hotel Mekah & Madinah", desc: "Bermitra dengan hotel marketing Mekah dan Madinah untuk rate kamar terbaik dan update ketersediaan musiman.", tag: "Mitra Hotel" },
-  { n: "Tiket Kereta Cepat Haramain (HHR)", desc: "Agen resmi HHR untuk rute Madinah–Mekah dan Jeddah–Madinah, kemudahan booking grup dan harga khusus.", tag: "Agen HHR" },
-  { n: "Paket Land Arrangement (LA)", desc: "Paket lengkap Airport to Airport untuk rombongan travel: visa, bus, hotel, handling, porter, dan logistik.", tag: "Paket Lengkap" },
-  { n: "Ground Handling Mandiri", desc: "Layanan penjemputan, muthawif, dan pendampingan khusus bagi keluarga atau perseorangan umroh mandiri.", tag: "Fleksibel" },
-  { n: "City Tour & Ziarah Tambahan", desc: "Eksplorasi situs bersejarah Mekah, Madinah, Thaif sejuk, Badar, Al-Ula, dan Jeddah Laut Merah.", tag: "Edukasi Sirah" },
+  { n: "Muthawif Berpengalaman", desc: "Alumni Timur Tengah (Al-Azhar Mesir, Madinah, Ummul Qura) fasih bahasa Arab dan fiqih manasik.", tag: "Prioritas", img: IMAGES.tahajud },
+  { n: "Visa Umroh & Tasreh Raudhah", desc: "Penerbitan visa umroh resmi Kementrian Haji KSA via muassasah terpercaya, sudah termasuk tasreh Raudhah.", tag: "Resmi KSA", img: IMAGES.nabawi },
+  { n: "Transportasi Darat di Saudi", desc: "Armada Sedan, GMC Yukon, Hyundai H1/Staria, Hiace, Coaster hingga Big Bus Mercedes 45 seat.", tag: "Armada Lengkap", img: IMAGES.bus },
+  { n: "Booking Hotel Mekah & Madinah", desc: "Bermitra dengan hotel marketing Mekah dan Madinah untuk rate kamar terbaik dan update ketersediaan musiman.", tag: "Mitra Hotel", img: IMAGES.kaaba },
+  { n: "Tiket Kereta Cepat Haramain (HHR)", desc: "Agen resmi HHR untuk rute Madinah–Mekah dan Jeddah–Madinah, kemudahan booking grup dan harga khusus.", tag: "Agen HHR", img: IMAGES.train },
+  { n: "Paket Land Arrangement (LA)", desc: "Paket lengkap Airport to Airport untuk rombongan travel: visa, bus, hotel, handling, porter, dan logistik.", tag: "Paket Lengkap", img: IMAGES.hero },
+  { n: "Ground Handling Mandiri", desc: "Layanan penjemputan, muthawif, dan pendampingan khusus bagi keluarga atau perseorangan umroh mandiri.", tag: "Fleksibel", img: IMAGES.muthawifAvatar },
+  { n: "City Tour & Ziarah Tambahan", desc: "Eksplorasi situs bersejarah Mekah, Madinah, Thaif sejuk, Badar, Al-Ula, dan Jeddah Laut Merah.", tag: "Edukasi Sirah", img: IMAGES.thaif },
 ];
 
 // 6 Paket Ziarah
 export const CT_DATA = [
-  { name: "Ziarah Kota Mekah", sar: 250, min: "Min 4 Org", bonus: "Dokumentasi Video Rombongan", desc: "Jabal Tsur, Padang Arafah, Jabal Rahmah, Muzdalifah, Mina, dan Miqot Ji'ranah." },
-  { name: "City Tour Thaif Sejuk", sar: 650, min: "Min 4 Org", bonus: "Makan Siang Nasi Mandhi & Video", desc: "Masjid Ibnu Abbas, Pabrik Parfum Mawar, Kereta Gantung Teleferik, dan Miqot Qarnul Manazil." },
-  { name: "Ziarah Kota Madinah", sar: 200, min: "Min 4 Org", bonus: "Dokumentasi Video Rombongan", desc: "Masjid Quba, Kebun Kurma, Jabal Uhud, Syuhada Uhud, Masjid Qiblatain dan Khandaq." },
-  { name: "Day Trip Al-Ula Heritage", sar: 785, min: "Min 4 Org", bonus: "Dokumentasi Foto & Video", desc: "Hegra (Madain Saleh), Elephant Rock, Maraya Concert Hall, dan kota tua Al-Ula." },
-  { name: "Ziarah Sejarah Badar", sar: 350, min: "Min 4 Org", bonus: "Kajian Sirah Perang Badar", desc: "Makam Syuhada Perang Badar, Masjid Al-Arisy, dan napak tilas sejarah penentu peradaban Islam." },
-  { name: "City Escape Jeddah", sar: 300, min: "Min 4 Org", bonus: "Free Dokumentasi", desc: "Masjid Terapung Al-Rahmah, Corniche Laut Merah, Balad Heritage Town, dan pusat oleh-oleh." },
+  { name: "Ziarah Kota Mekah", sar: 250, min: "Min 4 Org", bonus: "Dokumentasi Video Rombongan", desc: "Jabal Tsur, Padang Arafah, Jabal Rahmah, Muzdalifah, Mina, dan Miqot Ji'ranah.", img: IMAGES.kaaba },
+  { name: "City Tour Thaif Sejuk", sar: 650, min: "Min 4 Org", bonus: "Makan Siang Nasi Mandhi & Video", desc: "Masjid Ibnu Abbas, Pabrik Parfum Mawar, Kereta Gantung Teleferik, dan Miqot Qarnul Manazil.", img: IMAGES.thaif },
+  { name: "Ziarah Kota Madinah", sar: 200, min: "Min 4 Org", bonus: "Dokumentasi Video Rombongan", desc: "Masjid Quba, Kebun Kurma, Jabal Uhud, Syuhada Uhud, Masjid Qiblatain dan Khandaq.", img: IMAGES.nabawi },
+  { name: "Day Trip Al-Ula Heritage", sar: 785, min: "Min 4 Org", bonus: "Dokumentasi Foto & Video", desc: "Hegra (Madain Saleh), Elephant Rock, Maraya Concert Hall, dan kota tua Al-Ula.", img: IMAGES.alula },
+  { name: "Ziarah Sejarah Badar", sar: 350, min: "Min 4 Org", bonus: "Kajian Sirah Perang Badar", desc: "Makam Syuhada Perang Badar, Masjid Al-Arisy, dan napak tilas sejarah penentu peradaban Islam.", img: IMAGES.badar },
+  { name: "City Escape Jeddah", sar: 300, min: "Min 4 Org", bonus: "Free Dokumentasi", desc: "Masjid Terapung Al-Rahmah, Corniche Laut Merah, Balad Heritage Town, dan pusat oleh-oleh.", img: IMAGES.jeddah },
 ];
 
 // Experience
 export const EX_DATA = [
-  { name: "Khandamah Sunset Peak", sar: 115, min: "Min 4 Org", bonus: "Dokumentasi Video", desc: "Menikmati pemandangan Masjidil Haram dan Menara Jam dari ketinggian bukit saat senja." },
-  { name: "Madinah Horse Riding", sar: 975, min: "Min 4 Org", bonus: "Instruktur & Perlengkapan", desc: "Pengalaman berkuda sunnah di padang terbuka Madinah Al-Munawwarah." },
-  { name: "Jabal Nur & Gua Hira Trekking", sar: 165, min: "Min 4 Org", bonus: "Pendampingan Khusus", desc: "Napak tilas pendakian ke Gua Hira tempat pertama kali wahyu Al-Qur'an diturunkan." },
-  { name: "Uhud Archers Hill Hiking", sar: 145, min: "Min 4 Org", bonus: "Kajian Interaktif", desc: "Hiking bukit pemanah Jabal Rumat sambil mendengarkan ulasan strategi perang Uhud." },
+  { name: "Khandamah Sunset Peak", sar: 115, min: "Min 4 Org", bonus: "Dokumentasi Video", desc: "Menikmati pemandangan Masjidil Haram dan Menara Jam dari ketinggian bukit saat senja.", img: IMAGES.hero },
+  { name: "Madinah Horse Riding", sar: 975, min: "Min 4 Org", bonus: "Instruktur & Perlengkapan", desc: "Pengalaman berkuda sunnah di padang terbuka Madinah Al-Munawwarah.", img: IMAGES.badar },
+  { name: "Jabal Nur & Gua Hira Trekking", sar: 165, min: "Min 4 Org", bonus: "Pendampingan Khusus", desc: "Napak tilas pendakian ke Gua Hira tempat pertama kali wahyu Al-Qur'an diturunkan.", img: IMAGES.kaaba },
+  { name: "Uhud Archers Hill Hiking", sar: 145, min: "Min 4 Org", bonus: "Kajian Interaktif", desc: "Hiking bukit pemanah Jabal Rumat sambil mendengarkan ulasan strategi perang Uhud.", img: IMAGES.nabawi },
 ];
 
 // Ibadah Jariyah & Badal
