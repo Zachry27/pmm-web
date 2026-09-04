@@ -136,6 +136,41 @@ export default function App() {
         </div>
       </div>
 
+      {/* Marquee Ticker (Tulisan Berjalan Resmi PMM) */}
+      <div className="bg-blue-950 text-blue-200 border-b border-blue-900/60 py-1.5 overflow-hidden select-none">
+        <div className="animate-marquee items-center gap-8 text-[11px] font-medium tracking-wide">
+          {[1, 2].map((k) => (
+            <React.Fragment key={k}>
+              <span className="inline-flex items-center gap-2">
+                <Sparkles className="w-3 h-3 text-amber-400" />
+                <span>Muthawif Bersertifikat & Alumni Timur Tengah (Al-Azhar, KSA, Sudan, Maroko, Tunisia)</span>
+              </span>
+              <span className="text-blue-500">•</span>
+              <span className="inline-flex items-center gap-2">
+                <Train className="w-3 h-3 text-blue-400" />
+                <span>Agen Resmi Haramain High Speed Railway (HHR)</span>
+              </span>
+              <span className="text-blue-500">•</span>
+              <span className="inline-flex items-center gap-2">
+                <Bus className="w-3 h-3 text-blue-400" />
+                <span>Armada Resmi: GMC Yukon, Hyundai Staria, Toyota Hiace, Coaster & Bus Mercedes 45 Seat</span>
+              </span>
+              <span className="text-blue-500">•</span>
+              <span className="inline-flex items-center gap-2">
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                <span>Layanan Lengkap Land Arrangement 1446 H / 2024–2025 M</span>
+              </span>
+              <span className="text-blue-500">•</span>
+              <span className="inline-flex items-center gap-2">
+                <PhoneCall className="w-3 h-3 text-blue-300" />
+                <span>Hotline 24 Jam di Mekah & Madinah: +62 821 5544 4787</span>
+              </span>
+              <span className="text-blue-500">•</span>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
+
       {/* Navbar */}
       <Navbar
         page={page}
@@ -475,25 +510,43 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
             className="w-full h-full object-cover object-center opacity-20 filter brightness-90"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-blue-950/75 to-slate-950"></div>
+          {/* Ornamen Geometris Islami Halus */}
+          <div className="absolute inset-0 bg-islamic-dark opacity-35 pointer-events-none"></div>
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-5">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center max-w-3xl mx-auto space-y-4 sm:space-y-5"
+          >
             {/* Tag Resmi */}
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300 text-[11px] sm:text-xs font-bold tracking-wide uppercase">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-slate-900/90 border border-slate-700 text-slate-300 text-[11px] sm:text-xs font-bold tracking-wide uppercase shadow-sm"
+            >
               <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
-              Layanan Land Arrangement & Muthawif Saudi
-            </div>
+              <span>Layanan Land Arrangement & Muthawif Saudi</span>
+            </motion.div>
 
-            {/* Motto Arab */}
-            <div className="font-arabic text-2xl sm:text-3xl md:text-4xl text-slate-200 tracking-wide">
-              خِدْمَةُ ضُيُوفِ الرَّحْمَنِ شَرَفٌ لَنَا
+            {/* Motto Arab dengan Ornamen Bintang 8 */}
+            <div className="flex items-center justify-center gap-3">
+              <span className="w-8 h-px bg-gradient-to-r from-transparent to-amber-400/60 hidden sm:block"></span>
+              <div className="font-arabic text-2xl sm:text-3xl md:text-4xl text-slate-200 tracking-wide">
+                خِدْمَةُ ضُيُوفِ الرَّحْمَنِ شَرَفٌ لَنَا
+              </div>
+              <span className="w-8 h-px bg-gradient-to-l from-transparent to-amber-400/60 hidden sm:block"></span>
             </div>
 
             {/* Judul Utama */}
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
               Muthawif Muda, <br />
-              <span className="text-blue-300">Melayani Perjalanan Umroh Anda</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-sky-200 to-blue-200">
+                Melayani Perjalanan Umroh Anda
+              </span>
             </h1>
 
             {/* Deskripsi */}
@@ -503,21 +556,27 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
 
             {/* Tombol Aksi Hero */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2.5 sm:gap-3 px-4 sm:px-0">
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setPage("simulator")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-800 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-800 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer"
               >
                 <FileSpreadsheet className="w-4 h-4" />
                 Buka Simulator Biaya (HPP)
-              </button>
-              <button
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setPage("muthawif")}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm border border-slate-700 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm border border-slate-700 transition-all cursor-pointer"
               >
                 <Users className="w-4 h-4 text-blue-300" />
                 Rincian Tugas Muthawif
-              </button>
-              <a
+              </motion.button>
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 href={WA}
                 target="_blank"
                 rel="noreferrer"
@@ -525,31 +584,36 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
               >
                 <PhoneCall className="w-4 h-4 text-blue-400" />
                 Hubungi Kami
-              </a>
+              </motion.a>
             </div>
 
             {/* Poin Kepercayaan */}
             <div className="pt-3 flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] sm:text-xs text-slate-400">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5 bg-slate-900/60 px-2.5 py-1 rounded-full border border-slate-800">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                 <span>Legalitas PT & NIB</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5 bg-slate-900/60 px-2.5 py-1 rounded-full border border-slate-800">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                 <span>Bahasa Arab & Inggris</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5 bg-slate-900/60 px-2.5 py-1 rounded-full border border-slate-800">
                 <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                 <span>Dewan Pengawas Senior</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Ringkasan Parameter Layanan (Grid Bersih Mobile) */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 sm:-mt-10 relative z-20">
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-md p-4 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="bg-white/95 backdrop-blur-md rounded-2xl border border-slate-200/90 shadow-lg p-4 sm:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center"
+        >
           <div className="p-2 sm:p-0 rounded-xl bg-slate-50 sm:bg-transparent border sm:border-0 border-slate-100">
             <div className="text-lg sm:text-2xl font-extrabold text-blue-900">
               280-300 SAR
@@ -582,16 +646,20 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
               Kereta Cepat HHR
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Dua Pilar Layanan */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-2 gap-5 sm:gap-8">
           {/* Kartu Biro Travel */}
-          <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+          <motion.div
+            whileHover={{ y: -3 }}
+            transition={{ duration: 0.2 }}
+            className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-blue-300 transition-colors"
+          >
             <div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center font-bold mb-3 sm:mb-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-100 text-blue-900 flex items-center justify-center font-bold mb-3 sm:mb-4 shadow-xs">
                 <Briefcase className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <h2 className="text-base sm:text-xl font-extrabold text-slate-900 mb-1.5 sm:mb-2">
@@ -617,16 +685,20 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
             </div>
             <button
               onClick={() => setPage("simulator")}
-              className="w-full py-3 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2"
+              className="w-full py-3 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-xs"
             >
               <FileSpreadsheet className="w-4 h-4" /> Hitung Rincian Paket LA
             </button>
-          </div>
+          </motion.div>
 
           {/* Kartu Rombongan Keluarga / Mandiri */}
-          <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4">
+          <motion.div
+            whileHover={{ y: -3 }}
+            transition={{ duration: 0.2 }}
+            className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:border-blue-300 transition-colors"
+          >
             <div>
-              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center font-bold mb-3 sm:mb-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 text-slate-800 flex items-center justify-center font-bold mb-3 sm:mb-4 shadow-xs">
                 <Users className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <h2 className="text-base sm:text-xl font-extrabold text-slate-900 mb-1.5 sm:mb-2">
@@ -658,7 +730,7 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
             >
               <PhoneCall className="w-4 h-4 text-blue-800" /> Konsultasi Umroh Mandiri
             </a>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -717,7 +789,7 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
       </section>
 
       {/* 8 Layanan Terpadu */}
-      <section className="py-12 bg-slate-200/60 border-y border-slate-200">
+      <section className="py-12 bg-slate-200/60 border-y border-slate-200 relative bg-islamic-pattern">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
             <div>
@@ -738,17 +810,19 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {SERVICES_LIST.map((item, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-xs hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between"
+                whileHover={{ y: -3 }}
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-xl border border-slate-200/90 overflow-hidden shadow-xs hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between"
               >
                 <div className="h-28 sm:h-32 relative overflow-hidden bg-slate-800">
                   <img
                     src={item.img}
                     alt={item.n}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-2 right-2 bg-slate-900/85 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                  <div className="absolute top-2 right-2 bg-slate-900/85 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-xs">
                     {item.tag}
                   </div>
                 </div>
@@ -765,7 +839,7 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
                     <span>→</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
