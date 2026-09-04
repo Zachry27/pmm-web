@@ -38,6 +38,7 @@ import {
 } from "lucide-react";
 
 import { LOGO } from "./logo.js";
+import { SAUDI_CS_AVATAR } from "./saudiAvatar.js";
 import {
   WA,
   WA_PHONE,
@@ -250,7 +251,7 @@ function FloatingCSWidget() {
   const [showTooltip, setShowTooltip] = useState(true);
 
   return (
-    <div className="fixed bottom-4 sm:bottom-6 right-3 sm:right-6 z-50 flex flex-col items-end gap-2 pointer-events-auto">
+    <div className="fixed bottom-3 sm:bottom-6 right-3 sm:right-6 z-50 flex flex-col items-end gap-2 pointer-events-auto">
       {/* Speech Bubble Tooltip Desktop Only */}
       <AnimatePresence>
         {showTooltip && (
@@ -289,30 +290,30 @@ function FloatingCSWidget() {
         rel="noreferrer"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="group flex items-center gap-2 sm:gap-2.5 bg-white hover:bg-slate-50 text-slate-900 p-1.5 sm:pl-2 sm:pr-4 sm:py-2 rounded-full shadow-lg border border-slate-300 transition-all cursor-pointer"
+        className="group flex items-center gap-2 bg-white/95 backdrop-blur-md hover:bg-white text-slate-900 p-1 sm:pl-2 sm:pr-4 sm:py-2 rounded-full shadow-lg border border-slate-300/90 transition-all cursor-pointer"
       >
-        {/* Avatar CS */}
-        <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
+        {/* Avatar CS Orang Saudi Asli (Shemagh & Agal) */}
+        <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-slate-300 bg-slate-100 shrink-0 shadow-xs">
           <img
-            src={IMAGES.csAvatar}
-            alt="Customer Service PMM"
-            className="w-full h-full object-cover"
+            src={SAUDI_CS_AVATAR}
+            alt="Customer Service Saudi PMM"
+            className="w-full h-full object-cover object-top"
           />
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+          <span className="absolute bottom-0 right-0 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
         </div>
 
-        {/* Text Details (Compact on mobile) */}
+        {/* Text Details */}
         <div className="text-left pr-2 sm:pr-0">
           <div className="flex items-center gap-1">
             <span className="font-extrabold text-[11px] sm:text-xs text-slate-900">CS PMM</span>
-            <span className="inline-flex items-center px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-bold">
+            <span className="inline-flex items-center px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 text-[8px] sm:text-[9px] font-bold">
               Online
             </span>
           </div>
-          <div className="text-[10px] text-blue-800 font-semibold flex items-center gap-1">
+          <div className="text-[9px] sm:text-[10px] text-blue-800 font-semibold flex items-center gap-1">
             <PhoneCall className="w-2.5 h-2.5" />
             <span className="hidden sm:inline">Chat WhatsApp</span>
-            <span className="sm:hidden">Chat</span>
+            <span className="sm:hidden">WhatsApp</span>
           </div>
         </div>
       </motion.a>
@@ -793,53 +794,140 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
             </div>
 
             <div className="lg:col-span-7">
-              <div className="border border-slate-200 rounded-xl overflow-hidden text-xs">
-                <div className="bg-slate-900 text-white font-bold p-3">
-                  Tabel Tarif Rute & Kenaikan Tiket HHR (Reyal Saudi - SAR)
+              {/* Tampilan Desktop: Tabel Lebar Bergaris Rapi */}
+              <div className="hidden sm:block border border-slate-200 rounded-xl overflow-hidden text-xs bg-white shadow-xs">
+                <div className="bg-slate-900 text-white font-bold p-3 flex justify-between items-center">
+                  <span>Tabel Tarif Rute & Kenaikan Tiket HHR</span>
+                  <span className="text-[11px] text-slate-400 font-normal">Mata uang: Reyal Saudi (SAR)</span>
                 </div>
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse min-w-[360px]">
+                  <table className="w-full text-left border-collapse min-w-[500px]">
                     <thead className="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
                       <tr>
-                        <th className="p-2.5">Rute & Kelas</th>
-                        <th className="p-2.5 text-center">Dasar</th>
-                        <th className="p-2.5 text-center">Naik 1</th>
-                        <th className="p-2.5 text-center">Naik 2</th>
-                        <th className="p-2.5 text-center">Naik 3</th>
+                        <th className="p-3">Rute & Kelas</th>
+                        <th className="p-3 text-right">Harga Dasar</th>
+                        <th className="p-3 text-right">Kenaikan 1</th>
+                        <th className="p-3 text-right">Kenaikan 2</th>
+                        <th className="p-3 text-right">Kenaikan 3</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-100 text-[11px] sm:text-xs">
-                      <tr>
-                        <td className="p-2.5 font-medium">Madinah - Mekah (Ekonomi)</td>
-                        <td className="p-2.5 text-center font-bold text-blue-800">172.50</td>
-                        <td className="p-2.5 text-center">224.25</td>
-                        <td className="p-2.5 text-center">276.00</td>
-                        <td className="p-2.5 text-center">306.77</td>
+                    <tbody className="divide-y divide-slate-100 font-mono text-xs">
+                      <tr className="hover:bg-slate-50/80 transition-colors">
+                        <td className="p-3 font-sans font-medium text-slate-900">Madinah - Mekah (Ekonomi)</td>
+                        <td className="p-3 text-right font-bold text-blue-900">172.50</td>
+                        <td className="p-3 text-right text-slate-700">224.25</td>
+                        <td className="p-3 text-right text-slate-700">276.00</td>
+                        <td className="p-3 text-right text-slate-700">306.77</td>
                       </tr>
-                      <tr className="bg-slate-50/50">
-                        <td className="p-2.5 font-medium">Madinah - Mekah (Bisnis)</td>
-                        <td className="p-2.5 text-center font-bold text-blue-800">380.65</td>
-                        <td className="p-2.5 text-center">616.40</td>
-                        <td className="p-2.5 text-center">852.15</td>
-                        <td className="p-2.5 text-center text-slate-400">-</td>
+                      <tr className="bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                        <td className="p-3 font-sans font-medium text-slate-900">Madinah - Mekah (Bisnis)</td>
+                        <td className="p-3 text-right font-bold text-blue-900">380.65</td>
+                        <td className="p-3 text-right text-slate-700">616.40</td>
+                        <td className="p-3 text-right text-slate-700">852.15</td>
+                        <td className="p-3 text-right text-slate-400 font-sans">-</td>
                       </tr>
-                      <tr>
-                        <td className="p-2.5 font-medium">Jeddah Airport - Madinah (Ekonomi)</td>
-                        <td className="p-2.5 text-center font-bold text-blue-800">138.00</td>
-                        <td className="p-2.5 text-center">172.50</td>
-                        <td className="p-2.5 text-center">218.50</td>
-                        <td className="p-2.5 text-center text-slate-400">-</td>
+                      <tr className="hover:bg-slate-50/80 transition-colors">
+                        <td className="p-3 font-sans font-medium text-slate-900">Jeddah Airport - Madinah (Ekonomi)</td>
+                        <td className="p-3 text-right font-bold text-blue-900">138.00</td>
+                        <td className="p-3 text-right text-slate-700">172.50</td>
+                        <td className="p-3 text-right text-slate-700">218.50</td>
+                        <td className="p-3 text-right text-slate-400 font-sans">-</td>
                       </tr>
-                      <tr className="bg-slate-50/50">
-                        <td className="p-2.5 font-medium">Jeddah Airport - Madinah (Bisnis)</td>
-                        <td className="p-2.5 text-center font-bold text-blue-800">323.15</td>
-                        <td className="p-2.5 text-center">708.40</td>
-                        <td className="p-2.5 text-center text-slate-400">-</td>
-                        <td className="p-2.5 text-center text-slate-400">-</td>
+                      <tr className="bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                        <td className="p-3 font-sans font-medium text-slate-900">Jeddah Airport - Madinah (Bisnis)</td>
+                        <td className="p-3 text-right font-bold text-blue-900">323.15</td>
+                        <td className="p-3 text-right text-slate-700">708.40</td>
+                        <td className="p-3 text-right text-slate-400 font-sans">-</td>
+                        <td className="p-3 text-right text-slate-400 font-sans">-</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
+              </div>
+
+              {/* Tampilan Mobile: Kartu Rute Per Kelas (Sangat Rapi, Tanpa Tergencet) */}
+              <div className="sm:hidden space-y-2.5">
+                <div className="bg-slate-900 text-white p-3 rounded-xl flex justify-between items-center text-xs">
+                  <span className="font-bold">Tarif Tiket Kereta Cepat (HHR)</span>
+                  <span className="text-[10px] text-slate-400">Dalam SAR</span>
+                </div>
+
+                {[
+                  {
+                    route: "Madinah - Mekah",
+                    cls: "Ekonomi",
+                    tiers: [
+                      { l: "Dasar", v: "172.50", highlight: true },
+                      { l: "Naik 1", v: "224.25" },
+                      { l: "Naik 2", v: "276.00" },
+                      { l: "Naik 3", v: "306.77" },
+                    ],
+                  },
+                  {
+                    route: "Madinah - Mekah",
+                    cls: "Bisnis",
+                    tiers: [
+                      { l: "Dasar", v: "380.65", highlight: true },
+                      { l: "Naik 1", v: "616.40" },
+                      { l: "Naik 2", v: "852.15" },
+                    ],
+                  },
+                  {
+                    route: "Jeddah Airport - Madinah",
+                    cls: "Ekonomi",
+                    tiers: [
+                      { l: "Dasar", v: "138.00", highlight: true },
+                      { l: "Naik 1", v: "172.50" },
+                      { l: "Naik 2", v: "218.50" },
+                    ],
+                  },
+                  {
+                    route: "Jeddah Airport - Madinah",
+                    cls: "Bisnis",
+                    tiers: [
+                      { l: "Dasar", v: "323.15", highlight: true },
+                      { l: "Naik 1", v: "708.40" },
+                    ],
+                  },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-white p-3.5 rounded-xl border border-slate-200 shadow-xs space-y-2"
+                  >
+                    <div className="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span className="font-bold text-xs text-slate-900">
+                        {item.route}
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-50 text-blue-900 border border-blue-200">
+                        {item.cls}
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 text-xs">
+                      {item.tiers.map((t, ti) => (
+                        <div
+                          key={ti}
+                          className={`p-2 rounded-lg border text-center ${
+                            t.highlight
+                              ? "bg-blue-50/80 border-blue-200"
+                              : "bg-slate-50 border-slate-100"
+                          }`}
+                        >
+                          <div className="text-[10px] text-slate-500 font-medium">
+                            {t.l}
+                          </div>
+                          <div
+                            className={`font-bold font-mono text-xs ${
+                              t.highlight ? "text-blue-900" : "text-slate-800"
+                            }`}
+                          >
+                            {t.v} <span className="text-[9px] font-normal font-sans text-slate-400">SAR</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

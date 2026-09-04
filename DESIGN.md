@@ -7,12 +7,9 @@ colors:
   primary-hover: "#1d4ed8"
   secondary: "#0f172a"
   tertiary: "#047857"
-  neutral-light: "#f8fafc"
-  neutral-dark: "#020617"
   surface: "#ffffff"
   border: "#e2e8f0"
   text-main: "#1e293b"
-  text-muted: "#64748b"
 typography:
   h1:
     fontFamily: Inter
@@ -69,9 +66,6 @@ components:
     textColor: "{colors.text-main}"
     rounded: "{rounded.md}"
     padding: 10px
-  border-box:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.border}"
 ---
 
 ## Overview
@@ -88,12 +82,9 @@ Design ethos:
 - **Primary (#1e40af - Tailwind Blue 800):** Primary brand actions, active navigation states, call-to-action buttons, and header highlights.
 - **Secondary (#0f172a - Slate 900):** Deep contrast typography, structural container bars, and authoritative section headers.
 - **Tertiary (#047857 - Emerald 700):** Online hotline status, success confirmations, price validation markers, and floating WhatsApp links with WCAG AA accessibility compliance.
-- **Neutral Light (#f8fafc - Slate 50):** App workspace background and alternating table rows.
-- **Neutral Dark (#020617 - Slate 950):** Top announcement bar and dark footer elements.
 - **Surface (#ffffff):** Card cards, pricing calculator panels, modal surfaces.
 - **Border (#e2e8f0 - Slate 200):** Delimiters for data grids, vehicle cards, and form inputs.
 - **Text Main (#1e293b - Slate 800):** Primary readability body text.
-- **Text Muted (#64748b - Slate 500):** Secondary labels, metadata timestamps, and subtitles.
 
 ## Typography
 
@@ -123,9 +114,6 @@ Design ethos:
 - `button-primary-hover`: Darkened blue state indicating active pointer press.
 - `badge-success`: Live badge for hotline and instant quote availability.
 - `card-base`: Container for vehicle fleets, route selectors, and simulator modules.
-- `page-container`: Global view wrapper with slate background.
-- `header-bar`: Dark announcement header.
-- `table-cell-muted`: Data table subtitles and metadata cells.
 - `input-field`: Standardized form control.
 
 ## Do's and Don'ts
