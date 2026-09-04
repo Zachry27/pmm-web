@@ -8,17 +8,18 @@ export const FB = "https://www.facebook.com/profile.php?id=100090863117392";
 // Gambar Premium HD Unsplash
 export const IMAGES = {
   hero: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1920&q=80",
-  kaaba: "https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=1200&q=80",
-  nabawi: "https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&w=1200&q=80",
-  thaif: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80",
-  alula: "https://images.unsplash.com/photo-1609825488888-3a766db05542?auto=format&fit=crop&w=800&q=80",
+  kaaba: "/muthawif_tawaf.jpg",
+  nabawi: "/nabawi_rawdah.jpg",
+  thaif: "/alula_tour.jpg",
+  alula: "/alula_tour.jpg",
   badar: "https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=800&q=80",
   jeddah: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
-  tahajud: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1200&q=80",
+  tahajud: "/muthawif_tawaf.jpg",
   bus: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=800&q=80",
-  train: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=800&q=80",
-  csAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&h=200&q=80",
-  muthawifAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&h=200&q=80"
+  train: "/hhr_train_opt.jpg",
+  airport: "/jeddah_airport_handling.jpg",
+  csAvatar: "/saudi_cs_pro.jpg",
+  muthawifAvatar: "/muthawif_tawaf.jpg"
 };
 
 // Transportasi 7 armada x 10 rute resmi dari dokumen PDF PMM 1446H
@@ -124,14 +125,14 @@ export const MUTHAWIF_DUTIES = [
 
 // Layanan Utama
 export const SERVICES_LIST = [
-  { n: "Muthawif Berpengalaman", desc: "Alumni Timur Tengah (Al-Azhar Mesir, Madinah, Ummul Qura) fasih bahasa Arab dan fiqih manasik.", tag: "Prioritas", img: IMAGES.tahajud },
-  { n: "Visa Umroh & Tasreh Raudhah", desc: "Penerbitan visa umroh resmi Kementrian Haji KSA via muassasah terpercaya, sudah termasuk tasreh Raudhah.", tag: "Resmi KSA", img: IMAGES.nabawi },
+  { n: "Muthawif Berpengalaman", desc: "Alumni Timur Tengah (Al-Azhar Mesir, Madinah, Ummul Qura) memandu thawaf, sa'i, tahajud, dan manasik sesuai sunnah.", tag: "Prioritas", img: "/muthawif_tawaf.jpg" },
+  { n: "Visa Umroh & Tasreh Raudhah", desc: "Penerbitan visa umroh resmi Kementrian Haji KSA via muassasah terpercaya, sudah termasuk tasreh Raudhah Madinah.", tag: "Resmi KSA", img: "/nabawi_rawdah.jpg" },
   { n: "Transportasi Darat di Saudi", desc: "Armada Sedan, GMC Yukon, Hyundai H1/Staria, Hiace, Coaster hingga Big Bus Mercedes 45 seat.", tag: "Armada Lengkap", img: IMAGES.bus },
-  { n: "Booking Hotel Mekah & Madinah", desc: "Bermitra dengan hotel marketing Mekah dan Madinah untuk rate kamar terbaik dan update ketersediaan musiman.", tag: "Mitra Hotel", img: IMAGES.kaaba },
-  { n: "Tiket Kereta Cepat Haramain (HHR)", desc: "Agen resmi HHR untuk rute Madinah–Mekah dan Jeddah–Madinah, kemudahan booking grup dan harga khusus.", tag: "Agen HHR", img: IMAGES.train },
+  { n: "Booking Hotel Mekah & Madinah", desc: "Bermitra dengan hotel marketing Mekah dan Madinah untuk rate kamar terbaik dan update ketersediaan musiman.", tag: "Mitra Hotel", img: "/makkah_halaq.jpg" },
+  { n: "Tiket Kereta Cepat Haramain (HHR)", desc: "Agen resmi HHR untuk rute Madinah–Mekah dan Jeddah–Madinah, kemudahan booking grup dan harga khusus.", tag: "Agen HHR", img: "/hhr_train_opt.jpg" },
   { n: "Paket Land Arrangement (LA)", desc: "Paket lengkap Airport to Airport untuk rombongan travel: visa, bus, hotel, handling, porter, dan logistik.", tag: "Paket Lengkap", img: IMAGES.hero },
-  { n: "Ground Handling Mandiri", desc: "Layanan penjemputan, muthawif, dan pendampingan khusus bagi keluarga atau perseorangan umroh mandiri.", tag: "Fleksibel", img: IMAGES.muthawifAvatar },
-  { n: "City Tour & Ziarah Tambahan", desc: "Eksplorasi situs bersejarah Mekah, Madinah, Thaif sejuk, Badar, Al-Ula, dan Jeddah Laut Merah.", tag: "Edukasi Sirah", img: IMAGES.thaif },
+  { n: "Ground Handling Mandiri", desc: "Layanan penjemputan bandara Jeddah/Madinah, porter, pendampingan check-in hotel dan bimbingan umroh mandiri.", tag: "Fleksibel", img: "/jeddah_airport_handling.jpg" },
+  { n: "City Tour & Ziarah Tambahan", desc: "Eksplorasi situs bersejarah Mekah, Madinah, Thaif sejuk, Badar, Al-Ula (Hegra), dan Jeddah Laut Merah.", tag: "Edukasi Sirah", img: "/alula_tour.jpg" },
 ];
 
 // 6 Paket Ziarah
