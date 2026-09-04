@@ -136,40 +136,42 @@ export default function App() {
         </div>
       </div>
 
-      {/* Marquee Ticker (Tulisan Berjalan Resmi PMM) */}
-      <div className="bg-blue-950 text-blue-200 border-b border-blue-900/60 py-1.5 overflow-hidden select-none">
-        <div className="animate-marquee items-center gap-8 text-[11px] font-medium tracking-wide">
-          {[1, 2].map((k) => (
-            <React.Fragment key={k}>
-              <span className="inline-flex items-center gap-2">
-                <Sparkles className="w-3 h-3 text-amber-400" />
-                <span>Muthawif Bersertifikat & Alumni Timur Tengah (Al-Azhar, KSA, Sudan, Maroko, Tunisia)</span>
-              </span>
-              <span className="text-blue-500">•</span>
-              <span className="inline-flex items-center gap-2">
-                <Train className="w-3 h-3 text-blue-400" />
-                <span>Agen Resmi Haramain High Speed Railway (HHR)</span>
-              </span>
-              <span className="text-blue-500">•</span>
-              <span className="inline-flex items-center gap-2">
-                <Bus className="w-3 h-3 text-blue-400" />
-                <span>Armada Resmi: GMC Yukon, Hyundai Staria, Toyota Hiace, Coaster & Bus Mercedes 45 Seat</span>
-              </span>
-              <span className="text-blue-500">•</span>
-              <span className="inline-flex items-center gap-2">
-                <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                <span>Layanan Lengkap Land Arrangement 1446 H / 2024–2025 M</span>
-              </span>
-              <span className="text-blue-500">•</span>
-              <span className="inline-flex items-center gap-2">
-                <PhoneCall className="w-3 h-3 text-blue-300" />
-                <span>Hotline 24 Jam di Mekah & Madinah: +62 821 5544 4787</span>
-              </span>
-              <span className="text-blue-500">•</span>
-            </React.Fragment>
-          ))}
+      {/* Marquee Ticker (Hanya tampil di Home, disembunyikan di Simulator agar tidak numpuk) */}
+      {page === "home" && (
+        <div className="bg-blue-950 text-blue-200 border-b border-blue-900/60 py-1.5 overflow-hidden select-none">
+          <div className="animate-marquee items-center gap-8 text-[11px] font-medium tracking-wide">
+            {[1, 2].map((k) => (
+              <React.Fragment key={k}>
+                <span className="inline-flex items-center gap-2">
+                  <Sparkles className="w-3 h-3 text-amber-400" />
+                  <span>Muthawif Bersertifikat & Alumni Timur Tengah (Al-Azhar, KSA, Sudan, Maroko, Tunisia)</span>
+                </span>
+                <span className="text-blue-500">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <Train className="w-3 h-3 text-blue-400" />
+                  <span>Agen Resmi Haramain High Speed Railway (HHR)</span>
+                </span>
+                <span className="text-blue-500">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <Bus className="w-3 h-3 text-blue-400" />
+                  <span>Armada Resmi: GMC Yukon, Hyundai Staria, Toyota Hiace, Coaster & Bus Mercedes 45 Seat</span>
+                </span>
+                <span className="text-blue-500">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                  <span>Layanan Lengkap Land Arrangement 1446 H / 2024–2025 M</span>
+                </span>
+                <span className="text-blue-500">•</span>
+                <span className="inline-flex items-center gap-2">
+                  <PhoneCall className="w-3 h-3 text-blue-300" />
+                  <span>Hotline 24 Jam di Mekah & Madinah: +62 821 5544 4787</span>
+                </span>
+                <span className="text-blue-500">•</span>
+              </React.Fragment>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Navbar */}
       <Navbar
@@ -286,7 +288,7 @@ function FloatingCSWidget() {
   const [showTooltip, setShowTooltip] = useState(true);
 
   return (
-    <div className="fixed bottom-3 sm:bottom-6 right-3 sm:right-6 z-50 flex flex-col items-end gap-2 pointer-events-auto">
+    <div className="fixed bottom-2.5 sm:bottom-6 right-2.5 sm:right-6 z-40 flex flex-col items-end gap-2 pointer-events-auto">
       {/* Speech Bubble Tooltip Desktop Only */}
       <AnimatePresence>
         {showTooltip && (
@@ -298,7 +300,7 @@ function FloatingCSWidget() {
           >
             <button
               onClick={() => setShowTooltip(false)}
-              className="absolute top-2 right-2 text-slate-400 hover:text-slate-600 p-0.5"
+              className="absolute top-2 right-2 text-slate-400 hover:text-slate-600 p-0.5 cursor-pointer"
             >
               <X className="w-3 h-3" />
             </button>
@@ -341,15 +343,9 @@ function FloatingCSWidget() {
         <div className="text-left pr-2 sm:pr-0">
           <div className="flex items-center gap-1">
             <span className="font-extrabold text-[11px] sm:text-xs text-slate-900">CS PMM</span>
-            <span className="inline-flex items-center px-1.5 py-0.2 rounded-full bg-emerald-100 text-emerald-800 text-[8px] sm:text-[9px] font-bold">
-              Online
-            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block"></span>
           </div>
-          <div className="text-[9px] sm:text-[10px] text-blue-800 font-semibold flex items-center gap-1">
-            <PhoneCall className="w-2.5 h-2.5" />
-            <span className="hidden sm:inline">Chat WhatsApp</span>
-            <span className="sm:hidden">WhatsApp</span>
-          </div>
+          <div className="text-[10px] text-slate-500 font-medium">Online</div>
         </div>
       </motion.a>
     </div>
@@ -1683,15 +1679,15 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
   }, []);
 
   return (
-    <div className="py-5 sm:py-8 bg-slate-100 min-h-screen pb-24 lg:pb-8">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-4 sm:space-y-6">
+    <div className="py-4 sm:py-8 bg-slate-100 min-h-screen pb-32 lg:pb-12">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-3.5 sm:space-y-6">
         {/* Header Bar */}
         <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
             <div className="text-[11px] font-extrabold text-blue-800 uppercase tracking-wider">
               Kalkulator Biaya Resmi 1446 H
             </div>
-            <h1 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5">
+            <h1 className="text-base sm:text-2xl font-extrabold text-slate-900 mt-0.5">
               Simulator HPP Land Arrangement Umroh
             </h1>
             <p className="text-slate-500 text-xs mt-0.5">
@@ -1703,7 +1699,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
           <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold self-start md:self-auto">
             <button
               onClick={() => applyStandardLA(true)}
-              className={`px-3 py-1.5 rounded-lg transition-all text-xs ${
+              className={`px-3 py-1.5 rounded-lg transition-all text-xs cursor-pointer ${
                 isStandardLA
                   ? "bg-blue-800 text-white font-bold shadow-xs"
                   : "text-slate-600 hover:text-slate-900"
@@ -1713,7 +1709,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
             </button>
             <button
               onClick={() => applyStandardLA(false)}
-              className={`px-3 py-1.5 rounded-lg transition-all text-xs ${
+              className={`px-3 py-1.5 rounded-lg transition-all text-xs cursor-pointer ${
                 !isStandardLA
                   ? "bg-blue-800 text-white font-bold shadow-xs"
                   : "text-slate-600 hover:text-slate-900"
@@ -1734,7 +1730,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                 : "text-slate-600"
             }`}
           >
-            1. Form Rencana
+            Form Input Rencana
           </button>
           <button
             onClick={() => setMobileTab("result")}
@@ -1744,9 +1740,9 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                 : "text-blue-900"
             }`}
           >
-            <span>2. Hasil HPP</span>
+            <span>Ringkasan HPP</span>
             {res && (
-              <span className="px-1.5 py-0.2 rounded-full bg-blue-100 text-blue-950 text-[10px]">
+              <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-950 text-[10px] font-bold">
                 {fIDR(res.hpp)}
               </span>
             )}
@@ -2148,14 +2144,14 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               open={op.trn}
               onToggle={() => tog("trn")}
             >
-              <div className="mb-3">
+              <div className="mb-3.5">
                 <div className="flex justify-between items-center mb-1.5">
                   <label className="text-xs font-bold text-slate-800">
-                    Jenis Armada:
+                    Pilih Jenis Armada:
                   </label>
                   <button
                     onClick={onOpenTransport}
-                    className="text-xs font-bold text-blue-800 hover:underline flex items-center gap-1"
+                    className="text-xs font-bold text-blue-800 hover:underline flex items-center gap-1 cursor-pointer"
                   >
                     <Bus className="w-3.5 h-3.5" /> Tabel Mobil
                   </button>
@@ -2165,14 +2161,14 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                     <button
                       key={v.n}
                       onClick={() => setVIdx(i)}
-                      className={`p-2 rounded-xl border text-left transition-all ${
+                      className={`p-2.5 rounded-xl border text-left transition-all min-w-0 cursor-pointer ${
                         vIdx === i
-                          ? "bg-blue-50 border-blue-800 text-blue-950 ring-1 ring-blue-800"
+                          ? "bg-blue-50 border-blue-800 text-blue-950 ring-2 ring-blue-800 shadow-xs"
                           : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
                       }`}
                     >
                       <div className="text-xs font-bold truncate">{v.n}</div>
-                      <div className="text-[10px] text-slate-500">{v.s} Seats</div>
+                      <div className="text-[10px] text-slate-500 mt-0.5">{v.s} Seats</div>
                     </button>
                   ))}
                 </div>
@@ -2182,7 +2178,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                 <label className="block text-xs font-bold text-slate-800 mb-1.5">
                   Rute Operasional ({VEH[vIdx].n}):
                 </label>
-                <div className="space-y-1 max-h-56 overflow-y-auto pr-1">
+                <div className="space-y-1.5">
                   {RT.map((r, i) => {
                     const isSelected = selR.includes(i);
                     const cost = VEH[vIdx].p[i] || 0;
@@ -2190,13 +2186,13 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                       <div
                         key={i}
                         onClick={() => togR(i)}
-                        className={`flex items-center justify-between p-2 rounded-lg border text-xs cursor-pointer transition-colors ${
+                        className={`flex items-center justify-between p-2.5 rounded-xl border text-xs cursor-pointer transition-all gap-2 ${
                           isSelected
-                            ? "bg-blue-50/70 border-blue-300 text-blue-950 font-medium"
+                            ? "bg-blue-50/70 border-blue-300 text-blue-950 font-semibold shadow-2xs"
                             : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50"
                         }`}
                       >
-                        <div className="flex items-center gap-2 pr-1 truncate">
+                        <div className="flex items-center gap-2.5 min-w-0 flex-1">
                           <div
                             className={`w-4 h-4 rounded flex items-center justify-center text-[10px] text-white shrink-0 ${
                               isSelected ? "bg-blue-800" : "bg-slate-300"
@@ -2206,7 +2202,9 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                           </div>
                           <span className="truncate">{r}</span>
                         </div>
-                        <span className="font-bold text-blue-900 shrink-0">{cost} SAR</span>
+                        <span className="font-bold text-blue-900 shrink-0 bg-white px-2 py-0.5 rounded border border-slate-100">
+                          {cost} SAR
+                        </span>
                       </div>
                     );
                   })}
@@ -2268,15 +2266,16 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
               </div>
             </SectionCard>
 
-            {/* Tombol Re-kalkulasi */}
+            {/* Tombol Re-kalkulasi & Switch ke Tab Ringkasan */}
             <button
               onClick={() => {
                 calculateHPP();
                 setMobileTab("result");
+                window.scrollTo({ top: 0, behavior: "smooth" });
               }}
-              className="w-full py-3.5 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+              className="w-full py-4 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-extrabold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
-              <FileSpreadsheet className="w-4 h-4" /> HITUNG ESTIMASI HPP
+              <FileSpreadsheet className="w-4 h-4" /> LIHAT HASIL RINGKASAN HPP →
             </button>
           </div>
 
@@ -2661,11 +2660,11 @@ function CounterInput({ label, sub, val, min, max, unit, onDec, onInc }) {
     <div className="space-y-1">
       <label className="block text-xs font-bold text-slate-800">{label}</label>
       {sub && <span className="block text-[10px] text-slate-400">{sub}</span>}
-      <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white w-full">
+      <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-white w-full max-w-[200px]">
         <button
           onClick={onDec}
           disabled={val <= min}
-          className="w-12 sm:w-10 h-10 sm:h-9 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-r border-slate-200 flex items-center justify-center cursor-pointer text-sm"
+          className="w-10 h-9 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-r border-slate-200 flex items-center justify-center cursor-pointer text-sm"
         >
           -
         </button>
@@ -2675,7 +2674,7 @@ function CounterInput({ label, sub, val, min, max, unit, onDec, onInc }) {
         <button
           onClick={onInc}
           disabled={val >= max}
-          className="w-12 sm:w-10 h-10 sm:h-9 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-l border-slate-200 flex items-center justify-center cursor-pointer text-sm"
+          className="w-10 h-9 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 text-slate-700 font-bold border-l border-slate-200 flex items-center justify-center cursor-pointer text-sm"
         >
           +
         </button>
