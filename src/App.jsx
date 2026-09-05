@@ -35,6 +35,14 @@ import {
   Layers,
   Clock,
   MessageCircle,
+  Search,
+  Languages,
+  BadgeCheck,
+  GraduationCap,
+  BookOpenCheck,
+  Share2,
+  SlidersHorizontal,
+  Crown,
 } from "lucide-react";
 
 import { LOGO } from "./logo.js";
@@ -67,6 +75,24 @@ const fIDR = (n) =>
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(n || 0);
+
+function IslamicOrnament({ className = "" }) {
+  return (
+    <svg
+      viewBox="0 0 220 220"
+      aria-hidden="true"
+      className={`pointer-events-none select-none ${className}`}
+      fill="none"
+    >
+      <g stroke="currentColor" strokeWidth="1.2">
+        <path d="M110 10 132 48 175 45 172 88 210 110 172 132 175 175 132 172 110 210 88 172 45 175 48 132 10 110 48 88 45 45 88 48Z" />
+        <path d="m110 38 17 29 34-2-2 34 29 17-29 17 2 34-34-2-17 29-17-29-34 2 2-34-29-17 29-17-2-34 34 2Z" />
+        <circle cx="110" cy="110" r="38" />
+        <path d="M110 72 121 99 148 110 121 121 110 148 99 121 72 110 99 99Z" />
+      </g>
+    </svg>
+  );
+}
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -546,6 +572,8 @@ function HeroSlider({ onOpenTransport, setPage }) {
         <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-blue-950/50 to-slate-950/90"></div>
         <div className="absolute inset-0 bg-islamic-dark opacity-20 pointer-events-none"></div>
       </div>
+      <IslamicOrnament className="absolute -left-20 -bottom-28 z-[1] w-80 h-80 text-blue-300/[0.08]" />
+      <IslamicOrnament className="absolute -right-24 -top-24 z-[1] w-80 h-80 text-amber-300/[0.08]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
@@ -1215,16 +1243,46 @@ function HomePage({ setPage, setPayModal, onOpenTransport }) {
 // HALAMAN LAYANAN MUTHAWIF
 // ----------------------------------------------------
 function MuthawifPage({ setPage }) {
+  const profiles = [
+    {
+      role: "Koordinator Ibadah Makkah",
+      alumni: "Alumni Arab Saudi & Al-Azhar",
+      focus: "Manasik, thawaf, sa'i, dan tahallul",
+      languages: ["Arab", "Indonesia", "Inggris"],
+      certification: "Pembimbing Manasik & Muthawif",
+      accent: "blue",
+    },
+    {
+      role: "Pembimbing Ziarah Madinah",
+      alumni: "Alumni Timur Tengah",
+      focus: "Sirah Nabawiyah, Raudhah, dan city tour",
+      languages: ["Arab", "Indonesia"],
+      certification: "Pendamping Haramain Terverifikasi",
+      accent: "emerald",
+    },
+    {
+      role: "Muthawifah & Pendamping Jamaah",
+      alumni: "Alumni Kampus Timur Tengah",
+      focus: "Raudhah, maqbaroh, dan kebutuhan jamaah wanita",
+      languages: ["Arab", "Indonesia", "Melayu"],
+      certification: "Pendamping Raudhah & Jamaah Wanita",
+      accent: "amber",
+    },
+  ];
+
   return (
-    <div className="py-8 sm:py-14 bg-slate-100 min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
+    <div className="py-8 sm:py-14 bg-slate-100 min-h-screen relative overflow-hidden">
+      <IslamicOrnament className="absolute -top-20 -right-20 w-72 h-72 text-blue-900/[0.05]" />
+      <IslamicOrnament className="absolute top-[38rem] -left-28 w-80 h-80 text-amber-600/[0.05]" />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-7 sm:space-y-10 relative">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-2.5">
-          <span className="text-xs font-extrabold text-blue-800 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+          <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-blue-800 uppercase tracking-wider bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
+            <BadgeCheck className="w-3.5 h-3.5" />
             Layanan Utama PMM
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900">
-            Cakupan Tugas & Tanggung Jawab Muthawif
+            Pendamping Ibadah yang Terlatih, Beradab, dan Terverifikasi
           </h1>
           <p className="text-slate-600 text-xs sm:text-sm leading-relaxed px-2">
             Mendampingi jamaah sejak menginjakkan kaki di bandara hingga kembali pulang ke tanah air. Membantu segala kebutuhan ibadah dan menjaga ketenangan jamaah selama di Haramain.
@@ -1234,31 +1292,105 @@ function MuthawifPage({ setPage }) {
           </div>
         </div>
 
-        {/* 14 Poin Cakupan Tugas */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          {MUTHAWIF_DUTIES.map((d, i) => (
-            <div
-              key={i}
-              className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs hover:border-blue-300 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <span className="w-6 h-6 rounded-full bg-blue-100 text-blue-900 text-xs font-bold flex items-center justify-center">
-                    {i + 1}
-                  </span>
-                  <span className="text-[10px] text-slate-400 font-mono">Tugas {i + 1}</span>
-                </div>
-                <h3 className="font-bold text-slate-900 text-sm">{d.title}</h3>
-                <p className="text-slate-600 text-xs leading-relaxed mt-1">{d.desc}</p>
-              </div>
+        {/* Profil tim profesional */}
+        <section className="space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+            <div>
+              <span className="text-[11px] font-black text-amber-700 uppercase tracking-[0.18em]">Standar Tim Lapangan</span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-950 mt-1">Profil Keahlian Muthawif PMM</h2>
             </div>
-          ))}
-        </div>
+            <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1.5 self-start sm:self-auto">
+              <ShieldCheck className="w-3.5 h-3.5" /> Identitas & kompetensi diverifikasi PMM
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+            {profiles.map((profile, index) => (
+              <article
+                key={profile.role}
+                className="group bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 overflow-hidden relative"
+              >
+                <IslamicOrnament className={`absolute -right-14 -top-14 w-44 h-44 ${profile.accent === "amber" ? "text-amber-600/[0.07]" : profile.accent === "emerald" ? "text-emerald-700/[0.07]" : "text-blue-800/[0.07]"}`} />
+                <div className={`h-1.5 ${profile.accent === "amber" ? "bg-amber-500" : profile.accent === "emerald" ? "bg-emerald-600" : "bg-blue-800"}`} />
+                <div className="p-5 sm:p-6 relative">
+                  <div className="flex items-start justify-between gap-3 mb-5">
+                    <div className="w-12 h-12 rounded-2xl bg-slate-950 text-white flex items-center justify-center shadow-md">
+                      <Users className="w-5 h-5" />
+                    </div>
+                    <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase tracking-wide text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1">
+                      <BadgeCheck className="w-3 h-3" /> Terverifikasi
+                    </span>
+                  </div>
+                  <div className="text-[10px] font-extrabold uppercase tracking-wider text-blue-800 mb-1.5">Profil {String(index + 1).padStart(2, "0")}</div>
+                  <h3 className="text-lg font-black text-slate-950 leading-tight">{profile.role}</h3>
+                  <p className="mt-2 text-xs text-slate-600 leading-relaxed">{profile.focus}</p>
+
+                  <div className="mt-5 space-y-3 border-t border-slate-100 pt-4">
+                    <div className="flex items-start gap-2.5">
+                      <GraduationCap className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-[10px] uppercase tracking-wide text-slate-400 font-bold">Latar Alumni</div>
+                        <div className="text-xs font-bold text-slate-800">{profile.alumni}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <BookOpenCheck className="w-4 h-4 text-blue-800 shrink-0 mt-0.5" />
+                      <div>
+                        <div className="text-[10px] uppercase tracking-wide text-slate-400 font-bold">Sertifikasi</div>
+                        <div className="text-xs font-bold text-slate-800">{profile.certification}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2.5">
+                      <Languages className="w-4 h-4 text-emerald-700 shrink-0 mt-0.5" />
+                      <div className="flex flex-wrap gap-1.5">
+                        {profile.languages.map((language) => (
+                          <span key={language} className="text-[10px] font-bold text-slate-700 bg-slate-100 border border-slate-200 px-2 py-1 rounded-lg">{language}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="text-[11px] text-slate-500 text-center">Penugasan personel menyesuaikan jadwal, kebutuhan jamaah, dan ketersediaan tim di Haramain.</p>
+        </section>
+
+        {/* 14 Poin Cakupan Tugas */}
+        <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-8 relative overflow-hidden">
+          <IslamicOrnament className="absolute -bottom-28 -right-20 w-80 h-80 text-blue-900/[0.035]" />
+          <div className="relative">
+            <div className="max-w-2xl mb-5 sm:mb-7">
+              <span className="text-[11px] font-black text-blue-800 uppercase tracking-[0.18em]">Cakupan Operasional</span>
+              <h2 className="text-xl sm:text-2xl font-black text-slate-950 mt-1">14 Tanggung Jawab Utama</h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+              {MUTHAWIF_DUTIES.map((d, i) => (
+                <div
+                  key={i}
+                  className="bg-slate-50/80 p-4 sm:p-5 rounded-2xl border border-slate-200 hover:bg-white hover:border-blue-300 hover:shadow-md transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-2.5">
+                      <span className="w-7 h-7 rounded-lg bg-blue-900 text-white text-[11px] font-black flex items-center justify-center shadow-sm">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    </div>
+                    <h3 className="font-extrabold text-slate-900 text-sm">{d.title}</h3>
+                    <p className="text-slate-600 text-xs leading-relaxed mt-1.5">{d.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Komitmen Kerjasama */}
-        <div className="bg-white p-5 sm:p-8 rounded-2xl border border-slate-200 shadow-xs space-y-3 sm:space-y-4 text-xs sm:text-sm leading-relaxed text-slate-700">
+        <div className="bg-gradient-to-br from-slate-950 to-blue-950 p-5 sm:p-8 rounded-3xl border border-slate-800 shadow-xl space-y-3 sm:space-y-4 text-xs sm:text-sm leading-relaxed text-slate-300 relative overflow-hidden">
+          <IslamicOrnament className="absolute -right-16 -top-16 w-64 h-64 text-amber-400/10" />
           <h2 className="text-base font-extrabold text-slate-900">
-            Komitmen Perpanjangan Tangan
+            <span className="text-white">Komitmen Perpanjangan Tangan</span>
           </h2>
           <p>
             Muthawif sebagai representasi dan wajah dari travel umrah adalah elemen penting dalam menjaga reputasi dan kepuasan jamaah. Peran ini mencerminkan dedikasi untuk memberikan pengalaman umrah yang bermakna dan berkualitas tinggi.
@@ -1269,7 +1401,7 @@ function MuthawifPage({ setPage }) {
           <div className="pt-2">
             <button
               onClick={() => setPage("simulator")}
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-800 hover:bg-blue-900 text-white font-bold text-xs transition-colors inline-flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-black text-xs transition-colors inline-flex items-center justify-center gap-2 relative"
             >
               <FileSpreadsheet className="w-4 h-4" /> Masukkan Muthawif ke Estimasi Biaya
             </button>
@@ -1284,46 +1416,128 @@ function MuthawifPage({ setPage }) {
 // HALAMAN KATALOG & PAKET
 // ----------------------------------------------------
 function JasaPage({ setPayModal, onOpenTransport }) {
-  const [tab, setTab] = useState("paket");
+  const [tab, setTab] = useState("layanan");
+  const [query, setQuery] = useState("");
+  const tabs = [
+    { id: "layanan", label: "Semua Jasa", count: SERVICES_LIST.length },
+    { id: "paket", label: "Paket Lengkap", count: 17 },
+    { id: "ziarah", label: "Ziarah & City Tour", count: CT_DATA.length },
+    { id: "exp", label: "Eksplorasi", count: EX_DATA.length },
+    { id: "jariyah", label: "Badal & Amal", count: IB_DATA.length },
+  ];
+  const filterCatalog = (items) => {
+    const needle = query.trim().toLowerCase();
+    if (!needle) return items;
+    return items.filter((item) =>
+      [item.n, item.name, item.desc, item.tag, item.bonus, item.min]
+        .filter(Boolean)
+        .join(" ")
+        .toLowerCase()
+        .includes(needle)
+    );
+  };
+  const filteredServices = filterCatalog(SERVICES_LIST);
+  const filteredTours = filterCatalog(CT_DATA);
+  const filteredExperiences = filterCatalog(EX_DATA);
+  const filteredCharity = filterCatalog(IB_DATA);
 
   return (
-    <div className="py-8 sm:py-14 bg-slate-100 min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-extrabold text-blue-800 uppercase tracking-wider">
-            Katalog Layanan PMM 1446 H
-          </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-            Layanan Umroh & Ziarah Terpadu
-          </h1>
-          <p className="text-slate-600 text-xs sm:text-sm">
-            Tersedia paket lengkap, city tour ziarah bersejarah, dan program amal jariyah.
-          </p>
+    <div className="py-8 sm:py-14 bg-slate-100 min-h-screen relative overflow-hidden">
+      <IslamicOrnament className="absolute top-80 -left-28 w-80 h-80 text-blue-900/[0.04]" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8 relative">
+        <div className="bg-gradient-to-br from-slate-950 via-blue-950 to-blue-900 text-white rounded-3xl p-5 sm:p-8 lg:p-10 relative overflow-hidden shadow-xl border border-blue-900">
+          <IslamicOrnament className="absolute -right-20 -top-24 w-80 h-80 text-amber-300/10" />
+          <div className="relative grid lg:grid-cols-[1fr_420px] gap-6 lg:items-end">
+            <div className="max-w-2xl space-y-2.5">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-black text-amber-300 uppercase tracking-[0.2em]">
+                <Crown className="w-3.5 h-3.5" /> Katalog Layanan PMM 1446 H
+              </span>
+              <h1 className="text-2xl sm:text-4xl font-black tracking-tight leading-tight">
+                Layanan Haramain, Dipilih Lebih Mudah
+              </h1>
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
+                Temukan muthawif, transportasi, paket ziarah, dan layanan ibadah dalam satu katalog terkurasi.
+              </p>
+            </div>
+            <div>
+              <label htmlFor="catalog-search" className="block text-[11px] font-bold text-blue-200 mb-2">Pencarian cepat katalog</label>
+              <div className="relative">
+                <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  id="catalog-search"
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Cari muthawif, HHR, Thaif, transportasi..."
+                  className="w-full bg-white text-slate-900 placeholder:text-slate-400 rounded-xl border border-white/20 pl-10 pr-10 py-3.5 text-sm outline-none focus:ring-2 focus:ring-amber-400 shadow-lg"
+                />
+                {query && (
+                  <button onClick={() => setQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-800" aria-label="Hapus pencarian">
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Tab Filter (Horizontal Scroll on Mobile) */}
-        <div className="flex justify-start sm:justify-center overflow-x-auto pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
-          <div className="inline-flex p-1 bg-slate-200 rounded-xl gap-1 shrink-0">
-            {[
-              { id: "paket", label: "Cakupan Paket Lengkap" },
-              { id: "ziarah", label: "Ziarah & City Tour" },
-              { id: "exp", label: "Eksplorasi Tambahan" },
-              { id: "jariyah", label: "Badal Umroh & Amal" },
-            ].map((t) => (
+        <div className="flex justify-start lg:justify-center overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 catalog-scroll">
+          <div className="inline-flex p-1.5 bg-white rounded-2xl gap-1.5 shrink-0 border border-slate-200 shadow-sm">
+            {tabs.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTab(t.id)}
-                className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-bold whitespace-nowrap transition-all ${
+                className={`px-3 sm:px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 ${
                   tab === t.id
-                    ? "bg-white text-blue-900 shadow-xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? "bg-blue-900 text-white shadow-md"
+                    : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                 }`}
               >
                 {t.label}
+                <span className={`text-[9px] rounded-full px-1.5 py-0.5 ${tab === t.id ? "bg-white/15 text-blue-100" : "bg-slate-100 text-slate-500"}`}>{t.count}</span>
               </button>
             ))}
           </div>
         </div>
+
+        {/* Katalog jasa utama */}
+        {tab === "layanan" && (
+          filteredServices.length ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+              {filteredServices.map((item, idx) => (
+                <article key={item.n} className="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                  <div className="h-44 relative overflow-hidden bg-slate-900">
+                    <img src={item.img} alt={item.n} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-slate-950/10" />
+                    <span className="absolute top-3 left-3 text-[10px] font-black uppercase tracking-wide bg-white/95 text-blue-900 border border-white rounded-full px-2.5 py-1 shadow-sm">{item.tag}</span>
+                    {idx < 3 && (
+                      <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-black bg-amber-500 text-slate-950 rounded-full px-2.5 py-1 shadow-sm">
+                        <Crown className="w-3 h-3" /> Rekomendasi
+                      </span>
+                    )}
+                    <div className="absolute left-4 bottom-3 flex items-center gap-1 text-[10px] font-bold text-white">
+                      <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" /> Standar PMM 5/5
+                    </div>
+                  </div>
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col">
+                    <div className="text-[10px] font-black uppercase tracking-[0.16em] text-blue-700 mb-2">Layanan {String(idx + 1).padStart(2, "0")}</div>
+                    <h2 className="font-black text-slate-950 text-base leading-snug">{item.n}</h2>
+                    <p className="text-slate-600 text-xs leading-relaxed mt-2 flex-1">{item.desc}</p>
+                    <a
+                      href={`https://wa.me/${WA_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(`Assalamu'alaikum Admin PMM, saya ingin konsultasi layanan ${item.n}.`)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="mt-4 w-full py-2.5 px-3 rounded-xl bg-slate-950 hover:bg-blue-900 text-white text-xs font-bold text-center transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      Lihat Detail Layanan <ArrowRight className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : <CatalogEmpty query={query} onReset={() => setQuery("")} />
+        )}
 
         {/* Tab 1: Cakupan Paket Lengkap Dokumen PMM */}
         {tab === "paket" && (
@@ -1383,23 +1597,25 @@ function JasaPage({ setPayModal, onOpenTransport }) {
 
         {/* Tab 2: Ziarah dengan Gambar HD */}
         {tab === "ziarah" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {CT_DATA.map((item, idx) => (
+          filteredTours.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+            {filteredTours.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs flex flex-col justify-between"
+                className="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
-                <div className="h-40 sm:h-44 relative overflow-hidden bg-slate-800">
+                <div className="h-44 sm:h-52 relative overflow-hidden bg-slate-800">
                   <img
                     src={item.img}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-2.5 right-2.5 bg-blue-900 text-white text-xs font-bold px-2.5 py-0.5 rounded-full shadow-xs">
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  <div className="absolute top-3 right-3 bg-blue-900 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow-xs border border-blue-700">
                     Mulai {item.sar} SAR
                   </div>
-                  <div className="absolute bottom-2.5 left-2.5 bg-slate-950/80 backdrop-blur-xs text-white text-[10px] sm:text-[11px] px-2 py-0.5 rounded font-medium">
-                    {item.min}
+                  <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                    <span className="bg-white/95 text-slate-900 text-[10px] px-2.5 py-1 rounded-full font-bold">{item.min}</span>
+                    {idx < 2 && <span className="bg-amber-500 text-slate-950 text-[10px] px-2.5 py-1 rounded-full font-black inline-flex items-center gap-1"><Star className="w-3 h-3 fill-slate-950" /> Favorit</span>}
                   </div>
                 </div>
 
@@ -1407,7 +1623,7 @@ function JasaPage({ setPayModal, onOpenTransport }) {
                   <div>
                     <h3 className="font-bold text-slate-900 text-base mb-1">{item.name}</h3>
                     <p className="text-slate-600 text-xs leading-relaxed mb-2.5">{item.desc}</p>
-                    <div className="text-[11px] font-semibold text-slate-700 bg-slate-50 p-2 rounded-lg border border-slate-100">
+                    <div className="text-[11px] font-semibold text-slate-700 bg-amber-50/60 p-2.5 rounded-xl border border-amber-200/70">
                       Fasilitas: {item.bonus}
                     </div>
                   </div>
@@ -1422,22 +1638,22 @@ function JasaPage({ setPayModal, onOpenTransport }) {
                 </div>
               </div>
             ))}
-          </div>
+          </div> : <CatalogEmpty query={query} onReset={() => setQuery("")} />
         )}
 
         {/* Tab 3: Experience */}
         {tab === "exp" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {EX_DATA.map((item, idx) => (
+          filteredExperiences.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {filteredExperiences.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs flex flex-col justify-between"
+                className="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="h-36 relative overflow-hidden bg-slate-800">
                   <img
                     src={item.img}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-2.5 right-2.5 bg-blue-900 text-white text-xs font-bold px-2 py-0.5 rounded-full">
                     Start {item.sar} SAR
@@ -1462,17 +1678,18 @@ function JasaPage({ setPayModal, onOpenTransport }) {
                 </div>
               </div>
             ))}
-          </div>
+          </div> : <CatalogEmpty query={query} onReset={() => setQuery("")} />
         )}
 
         {/* Tab 4: Ibadah Jariyah */}
         {tab === "jariyah" && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-            {IB_DATA.map((item, idx) => (
+          filteredCharity.length ? <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {filteredCharity.map((item, idx) => (
               <div
                 key={idx}
-                className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-4"
+                className="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-4 relative overflow-hidden"
               >
+                <IslamicOrnament className="absolute -right-12 -bottom-12 w-40 h-40 text-emerald-700/[0.05]" />
                 <div>
                   <div className="inline-block text-xs font-bold text-blue-900 bg-blue-50 px-2.5 py-0.5 rounded-full border border-blue-200 mb-2">
                     {item.sar} SAR / Paket
@@ -1493,9 +1710,24 @@ function JasaPage({ setPayModal, onOpenTransport }) {
                 </a>
               </div>
             ))}
-          </div>
+          </div> : <CatalogEmpty query={query} onReset={() => setQuery("")} />
         )}
       </div>
+    </div>
+  );
+}
+
+function CatalogEmpty({ query, onReset }) {
+  return (
+    <div className="bg-white border border-dashed border-slate-300 rounded-3xl px-5 py-14 text-center">
+      <span className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-500 inline-flex items-center justify-center mb-3">
+        <SlidersHorizontal className="w-5 h-5" />
+      </span>
+      <h3 className="font-black text-slate-900">Layanan belum ditemukan</h3>
+      <p className="text-xs text-slate-500 mt-1">Tidak ada hasil untuk “{query}” pada kategori ini.</p>
+      <button onClick={onReset} className="mt-4 px-4 py-2 rounded-xl bg-blue-900 text-white text-xs font-bold hover:bg-blue-950 transition-colors">
+        Tampilkan semua layanan
+      </button>
     </div>
   );
 }
@@ -1588,8 +1820,11 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
   // Hasil
   const [res, setRes] = useState(null);
+  const [summaryCopied, setSummaryCopied] = useState(false);
 
-  const calculateHPP = () => {
+  const calculateHPP = (overrides = {}) => {
+    const calcPax = overrides.pax ?? pax;
+    const calcVIdx = overrides.vIdx ?? vIdx;
     const tIDR = Number(tiket) || 0;
     const vIDR = (Number(visa) || 0) * usdR;
 
@@ -1612,7 +1847,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
     const hmadIDR =
       hmad.nights > 0 ? (hmad.sar * kurs * hmad.nights) / rp[hmad.type] : 0;
 
-    const p = Math.max(1, pax);
+    const p = Math.max(1, calcPax);
 
     const hdlD = [];
     hdl
@@ -1624,7 +1859,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
             : h.mode === "hari"
             ? (h.sar * hProg) / p
             : h.mode === "dyn"
-            ? (350 + 15 * pax) / p
+            ? (350 + 15 * calcPax) / p
             : h.sar / p;
         hdlD.push({ n: h.label, idr: sp * kurs, sar: sp });
       });
@@ -1632,7 +1867,7 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
     const trnD = [];
     selR.forEach((ri) => {
-      const s = VEH[vIdx].p[ri] || 0;
+      const s = VEH[calcVIdx].p[ri] || 0;
       trnD.push({ n: RT[ri], idr: (s / p) * kurs, sar: s / p });
     });
     const trnIDR = trnD.reduce((a, t) => a + t.idr, 0);
@@ -1641,10 +1876,10 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
       tIDR + vIDR + hhrIDR + sIDR + mIDR + pIDR + aIDR + hmekIDR + hmadIDR + hdlIDR + trnIDR;
 
     const resultObj = {
-      pax,
+      pax: calcPax,
       hProg,
       kurs,
-      vehName: VEH[vIdx].n,
+      vehName: VEH[calcVIdx].n,
       tIDR,
       vIDR,
       hhrIDR,
@@ -1678,11 +1913,76 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
     calculateHPP();
   }, []);
 
+  const applyGroupPreset = (nextPax, nextVehicle) => {
+    setPax(nextPax);
+    setVIdx(nextVehicle);
+    calculateHPP({ pax: nextPax, vIdx: nextVehicle });
+  };
+
+  const buildWhatsAppSummary = () => {
+    if (!res) return "";
+    const detailRows = [
+      ["Tiket pesawat PP", res.tIDR],
+      ["Visa + Tasreh Raudhah", res.vIDR],
+      ["Kereta Cepat HHR", res.hhrIDR],
+      ["Hotel Makkah", res.hmekIDR],
+      ["Hotel Madinah", res.hmadIDR],
+      ["Ground handling", res.hdlIDR],
+      ["Transportasi darat", res.trnIDR],
+      ["Konsumsi", res.mIDR],
+      ["Perlengkapan", res.pIDR],
+      ["Asuransi", res.aIDR],
+      ["SISKOPATUH", res.sIDR],
+    ].filter(([, value]) => value > 0);
+
+    return [
+      "*RINCIAN ESTIMASI HPP UMROH — PMM*",
+      "Persatuan Muthawif Muda",
+      "",
+      `Rombongan: ${res.pax} jamaah`,
+      `Program: ${res.hProg} hari`,
+      `Armada: ${res.vehName}`,
+      `Kurs acuan: 1 SAR = ${fIDR(res.kurs)}`,
+      "",
+      "*Biaya per jamaah:*",
+      ...detailRows.map(([label, value]) => `• ${label}: ${fIDR(value)}`),
+      "",
+      `*HPP per pax: ${fIDR(res.hpp)}*`,
+      `Total estimasi rombongan: ${fIDR(res.hpp * res.pax)}`,
+      "",
+      "*Rekomendasi harga jual per pax:*",
+      `• Quad: ${fIDR(res.quad)}`,
+      `• Triple: ${fIDR(res.triple)}`,
+      `• Double: ${fIDR(res.double)}`,
+      "",
+      "Estimasi dapat berubah mengikuti kurs dan ketersediaan layanan. Mohon konfirmasi final kepada Admin PMM.",
+    ].join("\n");
+  };
+
+  const shareSummaryToWhatsApp = async () => {
+    const summary = buildWhatsAppSummary();
+    if (!summary) return;
+    try {
+      await navigator.clipboard.writeText(summary);
+      setSummaryCopied(true);
+      setTimeout(() => setSummaryCopied(false), 2500);
+    } catch (error) {
+      setSummaryCopied(false);
+    }
+    window.open(
+      `https://wa.me/${WA_PHONE.replace(/\D/g, "")}?text=${encodeURIComponent(summary)}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
-    <div className="py-4 sm:py-8 bg-slate-100 min-h-screen pb-32 lg:pb-12">
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-3.5 sm:space-y-6">
+    <div className="py-4 sm:py-8 bg-slate-100 min-h-screen pb-32 lg:pb-12 relative overflow-hidden">
+      <IslamicOrnament className="absolute top-40 -right-24 w-80 h-80 text-blue-900/[0.04]" />
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 space-y-3.5 sm:space-y-6 relative">
         {/* Header Bar */}
-        <div className="bg-white p-3.5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3">
+        <div className="bg-white p-4 sm:p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 relative overflow-hidden">
+          <IslamicOrnament className="absolute -right-20 -top-20 w-60 h-60 text-blue-900/[0.04]" />
           <div className="space-y-1">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200/60 text-[10px] sm:text-[11px] font-extrabold text-blue-800 uppercase tracking-wider">
               <Sparkles className="w-3 h-3 text-amber-500 shrink-0" />
@@ -1718,6 +2018,34 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
             >
               Kustom Bebas
             </button>
+          </div>
+        </div>
+
+        {/* Quick presets */}
+        <div className="bg-gradient-to-r from-slate-950 to-blue-950 rounded-2xl p-3 sm:p-4 border border-slate-800 shadow-md flex flex-col lg:flex-row lg:items-center gap-3 lg:justify-between relative overflow-hidden">
+          <IslamicOrnament className="absolute -left-16 -bottom-20 w-52 h-52 text-amber-400/[0.08]" />
+          <div className="relative flex items-center gap-2.5">
+            <span className="w-9 h-9 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center shrink-0"><Users className="w-4 h-4" /></span>
+            <div>
+              <div className="text-xs font-black text-white">Preset cepat rombongan</div>
+              <div className="text-[10px] text-slate-400">Jumlah pax dan armada langsung disesuaikan</div>
+            </div>
+          </div>
+          <div className="relative grid grid-cols-1 min-[430px]:grid-cols-3 gap-2 w-full lg:w-auto">
+            {[
+              { label: "Keluarga 4 Pax", detail: "GMC Yukon · privat", pax: 4, vehicle: 1 },
+              { label: "Grup Kecil 10 Pax", detail: "Toyota Hiace", pax: 10, vehicle: 4 },
+              { label: "Bus 40 Pax", detail: "Mercedes Big Bus", pax: 40, vehicle: 6 },
+            ].map((preset) => (
+              <button
+                key={preset.pax}
+                onClick={() => applyGroupPreset(preset.pax, preset.vehicle)}
+                className={`rounded-xl border px-3 py-2.5 text-left transition-all ${pax === preset.pax ? "bg-white border-white shadow-md" : "bg-white/[0.06] border-white/15 hover:bg-white/10"}`}
+              >
+                <span className={`block text-[11px] font-black ${pax === preset.pax ? "text-blue-950" : "text-white"}`}>{preset.label}</span>
+                <span className={`block text-[9px] mt-0.5 ${pax === preset.pax ? "text-slate-500" : "text-slate-400"}`}>{preset.detail}</span>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -2290,24 +2618,38 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
             {res && (
               <>
                 {/* Kartu HPP Utama */}
-                <div className="bg-slate-900 text-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-800">
-                  <div className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 mb-0.5">
-                    Estimasi HPP per Jamaah
-                  </div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-blue-300 tracking-tight mb-2">
-                    {fIDR(res.hpp)}
-                    <span className="text-xs font-normal text-slate-400"> / pax</span>
-                  </div>
-                  <div className="text-xs text-slate-300 flex flex-wrap gap-1.5 pt-1.5 border-t border-slate-800">
-                    <span className="bg-slate-800 px-2 py-0.5 rounded text-[11px]">
-                      {pax} Jamaah
-                    </span>
-                    <span className="bg-slate-800 px-2 py-0.5 rounded text-[11px]">
-                      {res.vehName}
-                    </span>
-                    <span className="bg-slate-800 px-2 py-0.5 rounded text-[11px]">
-                      {hProg} Hari
-                    </span>
+                <div className="bg-gradient-to-br from-slate-950 via-blue-950 to-blue-900 text-white p-5 sm:p-6 rounded-3xl shadow-xl border border-blue-900 relative overflow-hidden">
+                  <IslamicOrnament className="absolute -right-14 -top-16 w-56 h-56 text-amber-300/10" />
+                  <div className="relative">
+                    <div className="flex items-start justify-between gap-3 mb-3">
+                      <div>
+                        <div className="text-[10px] sm:text-xs font-black uppercase tracking-[0.16em] text-blue-200 mb-1">
+                          Estimasi HPP per Jamaah
+                        </div>
+                        <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+                          {fIDR(res.hpp)}
+                          <span className="text-xs font-normal text-blue-200"> / pax</span>
+                        </div>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase tracking-wide bg-emerald-500/15 text-emerald-300 border border-emerald-400/25 rounded-full px-2.5 py-1">
+                        <ShieldCheck className="w-3 h-3" /> Terhitung
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2 py-3 border-y border-white/10 mb-3">
+                      <div>
+                        <div className="text-[9px] uppercase tracking-wide text-blue-300">Total Rombongan</div>
+                        <div className="text-sm font-black text-amber-300 mt-0.5">{fIDR(res.hpp * res.pax)}</div>
+                      </div>
+                      <div>
+                        <div className="text-[9px] uppercase tracking-wide text-blue-300">Harga Jual Quad</div>
+                        <div className="text-sm font-black text-white mt-0.5">{fIDR(res.quad)}</div>
+                      </div>
+                    </div>
+                    <div className="text-xs text-slate-300 flex flex-wrap gap-1.5">
+                      <span className="bg-white/10 px-2.5 py-1 rounded-lg text-[10px] border border-white/10">{res.pax} Jamaah</span>
+                      <span className="bg-white/10 px-2.5 py-1 rounded-lg text-[10px] border border-white/10">{res.vehName}</span>
+                      <span className="bg-white/10 px-2.5 py-1 rounded-lg text-[10px] border border-white/10">{res.hProg} Hari</span>
+                    </div>
                   </div>
                 </div>
 
@@ -2373,6 +2715,13 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
                 {/* Aksi Download PDF & Hubungi */}
                 <div className="space-y-2">
+                  <button
+                    onClick={shareSummaryToWhatsApp}
+                    className="w-full py-3.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-black shadow-md transition-all flex items-center justify-center gap-2"
+                  >
+                    {summaryCopied ? <CheckCircle2 className="w-4 h-4" /> : <Share2 className="w-4 h-4" />}
+                    {summaryCopied ? "Rincian Disalin & WhatsApp Dibuka" : "Salin Rincian ke WhatsApp"}
+                  </button>
                   <button
                     onClick={() => generateQuotationPDF(res)}
                     className="w-full py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-sm transition-all flex items-center justify-center gap-2"

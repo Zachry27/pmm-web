@@ -5,6 +5,31 @@
     overflow-x: hidden;
     max-width: 100vw;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  button,
+  a,
+  input,
+  select,
+  summary {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid #d97706;
+    outline-offset: 2px;
+  }
 }
 
 .font-arabic {
@@ -53,4 +78,31 @@
 .bg-islamic-dark {
   background-image: radial-gradient(rgba(51, 65, 85, 0.45) 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+.catalog-scroll {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.catalog-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee {
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
