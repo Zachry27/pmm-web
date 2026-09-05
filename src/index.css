@@ -79,6 +79,70 @@
   box-shadow: 0 0 14px rgba(29, 78, 216, 0.24);
 }
 
+/* Lightweight reveal system: opacity + transform only (GPU friendly) */
+.pmm-reveal {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 560ms cubic-bezier(.2,.8,.2,1) var(--pmm-delay, 0ms),
+    transform 620ms cubic-bezier(.2,.8,.2,1) var(--pmm-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.pmm-reveal.pmm-in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+.pmm-interactive {
+  position: relative;
+  isolation: isolate;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .pmm-interactive:hover {
+    transform: translateY(-2px);
+  }
+
+  .pmm-ambient-card {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+  }
+
+  .pmm-ambient-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(260px circle at var(--pmm-x, 50%) var(--pmm-y, 50%), rgba(29, 78, 216, 0.08), transparent 62%);
+    transition: opacity 220ms ease;
+    z-index: 0;
+  }
+
+  .pmm-ambient-card:hover::before {
+    opacity: 1;
+  }
+
+  .pmm-ambient-card > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@keyframes pmmSoftFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+
+@keyframes pmmSheen {
+  0% { transform: translateX(-140%) skewX(-12deg); opacity: 0; }
+  18% { opacity: .14; }
+  45%, 100% { transform: translateX(180%) skewX(-12deg); opacity: 0; }
+}
+
 body[data-pmm-premium="true"] main section {
   position: relative;
 }
@@ -136,6 +200,7 @@ body[data-pmm-premium="true"] main section:nth-of-type(3n+1)::after {
   font-size: 20px;
   line-height: 1;
   pointer-events: none;
+  animation: pmmSoftFloat 5.5s ease-in-out infinite;
 }
 
 body[data-pmm-premium="true"] button,
@@ -147,7 +212,25 @@ body[data-pmm-premium="true"] a {
 
 body[data-pmm-premium="true"] button:active,
 body[data-pmm-premium="true"] a:active {
-  transform: translateY(1px);
+  transform: translateY(1px) scale(.99);
+}
+
+body[data-pmm-premium="true"] a[class*="bg-blue"],
+body[data-pmm-premium="true"] button[class*="bg-blue"] {
+  overflow: hidden;
+}
+
+body[data-pmm-premium="true"] a[class*="bg-blue"]::after,
+body[data-pmm-premium="true"] button[class*="bg-blue"]::after {
+  content: "";
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  width: 32%;
+  left: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+  animation: pmmSheen 6.5s ease-in-out infinite;
 }
 
 ::-webkit-scrollbar {
@@ -240,6 +323,11 @@ body[data-pmm-simulator="true"] .pmm-simulator-root label {
 }
 
 @media (max-width: 640px) {
+  .pmm-reveal {
+    transform: translate3d(0, 12px, 0);
+    transition-duration: 460ms, 520ms;
+  }
+
   body[data-pmm-premium="true"] main section:nth-of-type(3n+1)::after {
     right: 18px;
     top: 18px;
@@ -376,8 +464,17 @@ body[data-pmm-simulator="true"] .pmm-simulator-root label {
     scroll-behavior: auto;
   }
 
-  .animate-marquee {
-    animation: none;
+  .animate-marquee,
+  body[data-pmm-premium="true"] main section:nth-of-type(3n+1)::after,
+  body[data-pmm-premium="true"] a[class*="bg-blue"]::after,
+  body[data-pmm-premium="true"] button[class*="bg-blue"]::after {
+    animation: none !important;
+  }
+
+  .pmm-reveal,
+  .pmm-reveal.pmm-in-view {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *,
