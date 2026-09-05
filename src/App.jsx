@@ -102,24 +102,69 @@ export default function App() {
 
   // Live Exchange Rate
   const [liveKurs, setLiveKurs] = useState({
-    sar: 4350,
-    usd: 16100,
-    label: "Tarif 1446H",
+    sar: 4713,
+    usd: 17674,
+    label: "Memuat...",
+    lastUpdated: "",
+    loading: true,
   });
 
-  useEffect(() => {
-    fetch("https://open.er-api.com/v6/latest/SAR")
-      .then((res) => res.json())
-      .then((d) => {
-        if (d && d.rates && d.rates.IDR) {
+  const fetchLiveKurs = () => {
+    setLiveKurs((prev) => ({ ...prev, loading: true }));
+    // Ambil rate SAR dan USD secara real-time
+    Promise.allSettled([
+      fetch("https://open.er-api.com/v6/latest/SAR").then((r) => r.json()),
+      fetch("https://open.er-api.com/v6/latest/USD").then((r) => r.json()),
+    ])
+      .then(([sarRes, usdRes]) => {
+        let newSar = null;
+        let newUsd = null;
+
+        if (sarRes.status === "fulfilled" && sarRes.value?.rates?.IDR) {
+          newSar = Math.round(sarRes.value.rates.IDR);
+        }
+        if (usdRes.status === "fulfilled" && usdRes.value?.rates?.IDR) {
+          newUsd = Math.round(usdRes.value.rates.IDR);
+        } else if (newSar) {
+          // Fallback peg 1 USD = 3.75 SAR
+          newUsd = Math.round(newSar * 3.75);
+        }
+
+        if (newSar) {
           setLiveKurs({
-            sar: Math.round(d.rates.IDR),
-            usd: Math.round(d.rates.IDR * 3.75),
-            label: "Kurs Terkini",
+            sar: newSar,
+            usd: newUsd || Math.round(newSar * 3.75),
+            label: "Live Real-Time",
+            lastUpdated: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
+            loading: false,
           });
+        } else {
+          // Fallback backup API jika open.er-api bermasalah
+          fetch("https://api.exchangerate-api.com/v4/latest/SAR")
+            .then((r) => r.json())
+            .then((d) => {
+              if (d?.rates?.IDR) {
+                const s = Math.round(d.rates.IDR);
+                setLiveKurs({
+                  sar: s,
+                  usd: Math.round(s * 3.75),
+                  label: "Live Real-Time",
+                  lastUpdated: new Date().toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }),
+                  loading: false,
+                });
+              }
+            })
+            .catch(() => setLiveKurs((prev) => ({ ...prev, loading: false })));
         }
       })
-      .catch(() => {});
+      .catch(() => setLiveKurs((prev) => ({ ...prev, loading: false })));
+  };
+
+  useEffect(() => {
+    fetchLiveKurs();
+    // Auto-refresh rate setiap 10 menit
+    const interval = setInterval(fetchLiveKurs, 600000);
+    return () => clearInterval(interval);
   }, []);
 
   const copyToClipboard = (text) => {
@@ -146,8 +191,11 @@ export default function App() {
             </span>
           </div>
           <div className="flex items-center gap-2 sm:gap-3 text-[11px] sm:text-xs shrink-0">
-            <span className="bg-slate-900 border border-slate-800 px-2 py-0.5 rounded text-slate-300">
-              1 SAR ≈ Rp {liveKurs.sar.toLocaleString("id-ID")}
+            <span className="bg-slate-900 border border-slate-800 px-2 py-0.5 rounded text-slate-300 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>1 SAR ≈ Rp {liveKurs.sar.toLocaleString("id-ID")}</span>
+              <span className="text-slate-500 hidden sm:inline">|</span>
+              <span className="text-slate-400 hidden sm:inline">1 USD ≈ Rp {liveKurs.usd.toLocaleString("id-ID")}</span>
             </span>
             <a
               href={WA}
@@ -1744,8 +1792,17 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
   // Parameter Rombongan
   const [pax, setPax] = useState(4);
   const [hProg, setHProg] = useState(4);
-  const [kurs, setKurs] = useState(defaultKurs || 4350);
-  const [usdR, setUsdR] = useState(defaultUsd || 16100);
+  const [kurs, setKurs] = useState(defaultKurs || 4713);
+  const [usdR, setUsdR] = useState(defaultUsd || 17674);
+
+  // Update kurs otomatis jika ada perubahan defaultKurs/defaultUsd dari API real-time
+  useEffect(() => {
+    if (defaultKurs) setKurs(defaultKurs);
+  }, [defaultKurs]);
+
+  useEffect(() => {
+    if (defaultUsd) setUsdR(defaultUsd);
+  }, [defaultUsd]);
 
   // Accordion Section
   const [op, setOp] = useState({
@@ -2117,9 +2174,15 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-slate-100">
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Kurs 1 SAR ke IDR
-                  </label>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-xs font-semibold text-slate-700">
+                      Kurs 1 SAR ke IDR
+                    </label>
+                    <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Real-Time
+                    </span>
+                  </div>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-bold text-slate-400">
                       Rp
@@ -2134,9 +2197,15 @@ function SimulatorPage({ defaultKurs, defaultUsd, onPay, onOpenTransport }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Kurs 1 USD ke IDR
-                  </label>
+                  <div className="flex justify-between items-center mb-1">
+                    <label className="text-xs font-semibold text-slate-700">
+                      Kurs 1 USD ke IDR
+                    </label>
+                    <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      Real-Time
+                    </span>
+                  </div>
                   <div className="relative">
                     <span className="absolute inset-y-0 left-0 pl-3 flex items-center text-xs font-bold text-slate-400">
                       Rp
