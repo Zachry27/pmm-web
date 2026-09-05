@@ -61,14 +61,63 @@ function markContentRhythm() {
   })
 }
 
+function markSimulatorLayout() {
+  const main = document.querySelector('main')
+  if (!main) return
+
+  const text = main.textContent || ''
+  const isSimulator = text.includes('Handling & Muthawif') && text.includes('Kendaraan & Rute')
+  document.body.dataset.pmmSimulator = isSimulator ? 'true' : 'false'
+  main.classList.toggle('pmm-simulator-root', isSimulator)
+
+  if (!isSimulator) return
+
+  // Mark the smallest useful blocks around long simulator content so mobile CSS
+  // can target them without coupling React logic to presentation details.
+  const markers = [
+    ['Handling & Muthawif', 'pmm-handling-panel'],
+    ['Kendaraan & Rute', 'pmm-route-panel'],
+    ['Hotel', 'pmm-hotel-panel'],
+  ]
+
+  const elements = Array.from(main.querySelectorAll('div, section, article'))
+  markers.forEach(([needle, className]) => {
+    const matches = elements.filter((el) => {
+      const t = (el.textContent || '').trim()
+      return t.includes(needle) && t.length < 9000
+    })
+    matches.sort((a, b) => (a.textContent || '').length - (b.textContent || '').length)
+    if (matches[0]) matches[0].classList.add(className)
+  })
+
+  // Long option rows (checkbox + title + description) need their own responsive hook.
+  elements.forEach((el) => {
+    const t = (el.textContent || '').trim()
+    const hasCheckbox = Boolean(el.querySelector('input[type="checkbox"]'))
+    if (hasCheckbox && t.length > 25 && t.length < 420) {
+      el.classList.add('pmm-simulator-option')
+    }
+  })
+}
+
+function runEnhancements() {
+  improveImageSemantics()
+  markContentRhythm()
+  markSimulatorLayout()
+}
+
 function boot() {
   installPremiumProgress()
-  markContentRhythm()
-  improveImageSemantics()
+  runEnhancements()
 
+  let queued = false
   const observer = new MutationObserver(() => {
-    improveImageSemantics()
-    markContentRhythm()
+    if (queued) return
+    queued = true
+    requestAnimationFrame(() => {
+      runEnhancements()
+      queued = false
+    })
   })
   observer.observe(document.getElementById('root'), { childList: true, subtree: true })
 }
