@@ -61,7 +61,6 @@
   font-family: 'Amiri', serif;
 }
 
-/* Thin editorial progress rail */
 .pmm-scroll-progress {
   position: fixed;
   inset: 0 0 auto 0;
@@ -80,7 +79,6 @@
   box-shadow: 0 0 14px rgba(29, 78, 216, 0.24);
 }
 
-/* Premium surface treatment: reduce “card soup” without rewriting components */
 body[data-pmm-premium="true"] main section {
   position: relative;
 }
@@ -124,13 +122,11 @@ body[data-pmm-premium="true"] main button:hover img {
   filter: saturate(.96) contrast(1.02);
 }
 
-/* More crafted image treatment */
 body[data-pmm-premium="true"] main img[src*="unsplash"],
 body[data-pmm-premium="true"] main img[src^="/"] {
   object-position: center;
 }
 
-/* Restrained Islamic ornament — identity, not decoration everywhere */
 body[data-pmm-premium="true"] main section:nth-of-type(3n+1)::after {
   content: "✦";
   position: absolute;
@@ -142,7 +138,6 @@ body[data-pmm-premium="true"] main section:nth-of-type(3n+1)::after {
   pointer-events: none;
 }
 
-/* Better button tactility */
 body[data-pmm-premium="true"] button,
 body[data-pmm-premium="true"] a {
   transition-property: color, background-color, border-color, opacity, transform, box-shadow;
@@ -155,7 +150,6 @@ body[data-pmm-premium="true"] a:active {
   transform: translateY(1px);
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
@@ -171,7 +165,6 @@ body[data-pmm-premium="true"] a:active {
   background: #94a3b8;
 }
 
-/* Ticker */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
@@ -187,7 +180,6 @@ body[data-pmm-premium="true"] a:active {
   animation-play-state: paused;
 }
 
-/* Islamic geometric textures */
 .bg-islamic-pattern {
   background-image:
     linear-gradient(45deg, rgba(30, 64, 175, 0.018) 25%, transparent 25%),
@@ -214,6 +206,39 @@ body[data-pmm-premium="true"] a:active {
   display: none;
 }
 
+/* Simulator: structural safeguards for narrow screens */
+body[data-pmm-simulator="true"] .pmm-simulator-root,
+body[data-pmm-simulator="true"] .pmm-simulator-root * {
+  box-sizing: border-box;
+}
+
+body[data-pmm-simulator="true"] .pmm-simulator-root {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
+
+body[data-pmm-simulator="true"] .pmm-simulator-root .flex > *,
+body[data-pmm-simulator="true"] .pmm-simulator-root .grid > * {
+  min-width: 0;
+}
+
+body[data-pmm-simulator="true"] .pmm-simulator-root input,
+body[data-pmm-simulator="true"] .pmm-simulator-root select,
+body[data-pmm-simulator="true"] .pmm-simulator-root textarea {
+  max-width: 100%;
+}
+
+body[data-pmm-simulator="true"] .pmm-simulator-root table {
+  width: 100%;
+}
+
+body[data-pmm-simulator="true"] .pmm-simulator-root p,
+body[data-pmm-simulator="true"] .pmm-simulator-root span,
+body[data-pmm-simulator="true"] .pmm-simulator-root label {
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 640px) {
   body[data-pmm-premium="true"] main section:nth-of-type(3n+1)::after {
     right: 18px;
@@ -224,6 +249,125 @@ body[data-pmm-premium="true"] a:active {
   body[data-pmm-premium="true"] .rounded-3xl,
   body[data-pmm-premium="true"] .rounded-2xl {
     box-shadow: 0 12px 34px rgba(15, 23, 42, 0.055);
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root {
+    font-size: 14px;
+    padding-bottom: 92px;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root > div,
+  body[data-pmm-simulator="true"] .pmm-simulator-root section {
+    max-width: 100%;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root .p-6,
+  body[data-pmm-simulator="true"] .pmm-simulator-root .p-5 {
+    padding: 14px !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root .px-6,
+  body[data-pmm-simulator="true"] .pmm-simulator-root .px-5 {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root .gap-4,
+  body[data-pmm-simulator="true"] .pmm-simulator-root .gap-5,
+  body[data-pmm-simulator="true"] .pmm-simulator-root .gap-6 {
+    gap: 12px !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root .rounded-3xl,
+  body[data-pmm-simulator="true"] .pmm-simulator-root .rounded-2xl {
+    border-radius: 18px !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-option {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px 12px !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+    border-radius: 15px !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-option input[type="checkbox"] {
+    flex: 0 0 auto;
+    width: 20px !important;
+    height: 20px !important;
+    margin-top: 2px;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-option label,
+  body[data-pmm-simulator="true"] .pmm-simulator-option div,
+  body[data-pmm-simulator="true"] .pmm-simulator-option span,
+  body[data-pmm-simulator="true"] .pmm-simulator-option p {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-option p,
+  body[data-pmm-simulator="true"] .pmm-simulator-option span[class*="text-slate-4"],
+  body[data-pmm-simulator="true"] .pmm-simulator-option span[class*="text-slate-5"] {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-handling-panel,
+  body[data-pmm-simulator="true"] .pmm-route-panel,
+  body[data-pmm-simulator="true"] .pmm-hotel-panel {
+    overflow: hidden;
+    max-width: 100%;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root h2,
+  body[data-pmm-simulator="true"] .pmm-simulator-root h3 {
+    line-height: 1.25;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root button,
+  body[data-pmm-simulator="true"] .pmm-simulator-root input,
+  body[data-pmm-simulator="true"] .pmm-simulator-root select {
+    min-height: 44px;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root [class*="overflow-x-auto"] {
+    max-width: calc(100vw - 28px);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root [class*="grid-cols-2"],
+  body[data-pmm-simulator="true"] .pmm-simulator-root [class*="grid-cols-3"],
+  body[data-pmm-simulator="true"] .pmm-simulator-root [class*="grid-cols-4"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root .sm\:grid-cols-2,
+  body[data-pmm-simulator="true"] .pmm-simulator-root .md\:grid-cols-2 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  body[data-pmm-simulator="true"] .fixed.bottom-2\.5.right-2\.5 {
+    bottom: 12px !important;
+    right: 12px !important;
+  }
+}
+
+@media (max-width: 390px) {
+  body[data-pmm-simulator="true"] .pmm-simulator-root {
+    font-size: 13px;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-option {
+    padding: 11px 10px !important;
+  }
+
+  body[data-pmm-simulator="true"] .pmm-simulator-root .p-4 {
+    padding: 12px !important;
   }
 }
 
