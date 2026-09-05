@@ -61,6 +61,62 @@ function markContentRhythm() {
   })
 }
 
+let revealObserver
+function installRevealMotion() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return
+        entry.target.classList.add('pmm-in-view')
+        revealObserver.unobserve(entry.target)
+      })
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -6% 0px',
+    })
+  }
+
+  const targets = document.querySelectorAll(
+    'main section, main article, main .rounded-3xl, main .rounded-2xl, main .grid > div'
+  )
+
+  targets.forEach((el, index) => {
+    if (el.dataset.pmmMotionBound === 'true') return
+    el.dataset.pmmMotionBound = 'true'
+    el.classList.add('pmm-reveal')
+    el.style.setProperty('--pmm-delay', `${Math.min(index % 6, 5) * 45}ms`)
+    revealObserver.observe(el)
+  })
+}
+
+function markInteractiveSurfaces() {
+  document.querySelectorAll('main a, main button').forEach((el) => {
+    if (el.dataset.pmmInteractive === 'true') return
+    el.dataset.pmmInteractive = 'true'
+    el.classList.add('pmm-interactive')
+  })
+
+  document.querySelectorAll('main .rounded-2xl, main .rounded-3xl').forEach((el) => {
+    if (el.querySelector('button, a, input, select')) return
+    el.classList.add('pmm-ambient-card')
+  })
+}
+
+function installPointerGlow() {
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches === false) return
+  document.querySelectorAll('.pmm-ambient-card').forEach((card) => {
+    if (card.dataset.pmmGlowBound === 'true') return
+    card.dataset.pmmGlowBound = 'true'
+    card.addEventListener('pointermove', (event) => {
+      const rect = card.getBoundingClientRect()
+      card.style.setProperty('--pmm-x', `${event.clientX - rect.left}px`)
+      card.style.setProperty('--pmm-y', `${event.clientY - rect.top}px`)
+    }, { passive: true })
+  })
+}
+
 function markSimulatorLayout() {
   const main = document.querySelector('main')
   if (!main) return
@@ -72,8 +128,6 @@ function markSimulatorLayout() {
 
   if (!isSimulator) return
 
-  // Mark the smallest useful blocks around long simulator content so mobile CSS
-  // can target them without coupling React logic to presentation details.
   const markers = [
     ['Handling & Muthawif', 'pmm-handling-panel'],
     ['Kendaraan & Rute', 'pmm-route-panel'],
@@ -90,7 +144,6 @@ function markSimulatorLayout() {
     if (matches[0]) matches[0].classList.add(className)
   })
 
-  // Long option rows (checkbox + title + description) need their own responsive hook.
   elements.forEach((el) => {
     const t = (el.textContent || '').trim()
     const hasCheckbox = Boolean(el.querySelector('input[type="checkbox"]'))
@@ -104,6 +157,9 @@ function runEnhancements() {
   improveImageSemantics()
   markContentRhythm()
   markSimulatorLayout()
+  installRevealMotion()
+  markInteractiveSurfaces()
+  installPointerGlow()
 }
 
 function boot() {
